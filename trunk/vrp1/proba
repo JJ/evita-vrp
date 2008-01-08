@@ -1,0 +1,66 @@
+  // doInnerLoop is called by the outer GA from the evaluate method by this
+  small piece of code:
+        ObjectVectorIndividual objVecInd = doInnerLoop(state, structureInd);
+        // the fitness of the current individual is the same as the best
+  individual evolved from the inner GA
+        ind.fitness = objVecInd.fitness;
+ 
+  private ObjectVectorIndividual doInnerLoop(EvolutionState state,
+  TestCaseStructureIndividual structure) {
+       // create a new state
+    NestedGPInitializer init = (NestedGPInitializer) state.initializer;
+ 
+    // get a clean database
+    ParameterDatabase paramDatabase = init.getCleanDatabase();
+    // set the settings in the new database //
+  vector.object-vect-spec.genome-size
+    // if these are fixed, just use a param field
+    paramDatabase.setProperty(VectorDefaults.P_VECTOR + '.' +
+  ObjectVectorSpecies.P_OBJECTVECTOR + '.' + VectorSpecies.P_GENOMESIZE,
+      Integer.toString(test.b.size()));
+    String type = ObjectVectorSpecies.P_OBJECTVECTOR + '.' +
+  ObjectVectorSpecies.P_VALUETYPE + '.';
+ 
+    // I use the database for other custom paramater passing as well
+    int i = 0; for(OOConstant param : test.b){
+     paramDatabase.setProperty(type + (i++), param.type.getCanonicalName());
+    }
+ 
+    int generations = getMaxGenForData(constants);
+    paramDatabase.setProperty(EvolutionState.P_GENERATIONS, Integer.toString
+  (generations));
+    int popsize = getMaxPopForData(constants);
+    paramDatabase.setProperty("pop.subpop.0.size", Integer.toString
+  (popsize));
+  //  state.output.message("Max num of generations: " + generations + "
+  Population size: " + popsize);
+ 
+    EvolutionState state2 = Evolve.initialize(paramDatabase,
+  init.gaRandomOffset++);
+    // manualy set it up
+    state2.setup(state2, null);
+ 
+    // I have to move certain parts of the current problem to the problem
+  for the inner GA
+    // extract the problem from state
+    ParameterGenProblem problem =
+  (ParameterGenProblem)state2.evaluator.p_problem;
+ 
+    // set the new compiled testcase as a subject in the problem
+    problem.structure = structure;
+    problem.testcase = test.a;
+    problem.initGenome = constants.toArray(new OOConstant[constants.size
+  ()]);
+ 
+    // the state object of the inner GA has a reference to the outer GA
+  state
+    ((ParameterGenState)state2).outerState = (OOTestCaseState)state;
+ 
+ 
+    // start the evolution on the parameters
+    Evolve.startFresh(state2, null);
+ 
+    // extract the best individual and return it
+    BestSelector bs = (BestSelector)state2.statistics;
+       return (ObjectVectorIndividual)bs.best_of_run[0];
+   }
