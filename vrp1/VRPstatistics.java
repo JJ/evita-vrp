@@ -1,7 +1,7 @@
 package ec.app.vrp1;
 
 import ec.EvolutionState;
-import ec.Individual;
+//import ec.Individual;
 import ec.simple.SimpleStatistics;
 import ec.steadystate.SteadyStateStatisticsForm;
 import ec.util.Output;
