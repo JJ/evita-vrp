@@ -6,6 +6,7 @@ import ec.util.*;*/
 
 import java.util.ArrayList;
 import ec.EvolutionState;
+import ec.app.itp.ITPdata;
 
 public class Route  {
 	public ArrayList <Shop> shopsVisited;
@@ -32,7 +33,7 @@ public class Route  {
   Calculate the route length. We must ensure the warehouse appears at the begining
   and the end of the route 
  * */
-	public double calculateDistance(VRPdata data){
+	public double calculateDistance(ITPdata data){
 	
 		distanceTravelled = 0.0;
 		demand = data.shopList.get(0).currentDeliverySize;
@@ -48,7 +49,7 @@ public class Route  {
  * @param data
  * @return
  */	
-	public double calculateTime(VRPdata data){
+	public double calculateTime(ITPdata data){
 		time = distanceTravelled/data.speed + (shopsVisited.size()-2)*data.downloadTime; 
 		return time;
 	}
@@ -57,7 +58,7 @@ public class Route  {
 	 * @param data
 	 * @return
 	 */
-	public double calculateCost(VRPdata data){
+	public double calculateCost(ITPdata data){
 		cost = distanceTravelled*data.costPerKm;
 		return cost;
 	}

@@ -6,7 +6,7 @@
 package ec.app.vrp1;
 
 //import java.io.*;
-//import ec.*;
+
 
 
 import ec.EvolutionState;
@@ -15,16 +15,15 @@ import ec.Problem;
 import ec.simple.SimpleFitness;
 import ec.simple.SimpleProblemForm;
 import ec.vector.PermutationVectorIndividual;
-//import ec.app.vrp.ITPdata;
-//import ec.app.vrp.VRPdata;
-import ec.app.vrp1.VRPdata;
+//import ec.app.vrp1.VRPdata;
+import ec.app.itp.ITPdata;
 import ec.util.*;
 import java.util.ArrayList;
 
 public class vrp extends Problem implements SimpleProblemForm{
 	private static final long serialVersionUID = 1L;
-//	public ITPdata input;
-	public VRPdata input;
+	public ITPdata input;
+//	public VRPdata input;
 	public ArrayList<Route> allRoutes;
 	public double totalCost;
 
@@ -33,8 +32,8 @@ public class vrp extends Problem implements SimpleProblemForm{
 		// very important, remember this
 		super.setup(state,base);
 	// Load all the problem data;	
-//		input = new ITPdata();
-		input = new VRPdata();
+		input = new ITPdata();
+//		input = new VRPdata();
 		input.setup(state, base);
 
 	}     
@@ -175,7 +174,7 @@ public class vrp extends Problem implements SimpleProblemForm{
         calculateRoutes(ind);
         calculateTotalCost();
         //Instead of this, i should try to minimise the cost
-        double myfit = 1/(1-totalCost);
+        double myfit = 1/(1+totalCost);
 
         	
 /* Toy code for testing
