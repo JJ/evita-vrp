@@ -18,7 +18,7 @@ public class ITPstatistics extends SimpleStatistics implements
         
         state.output.println("\nBest Individual of Run:",Output.V_NO_GENERAL,statisticslog);
         
-        String costline = "Cost: "+ ((itp)(state.evaluator.p_problem)).minCost; 
+        String costline = "Cost: "+ ((itp)(state.evaluator.p_problem)).getMinCost(); 
         for(int x=0;x<state.population.subpops.length;x++ ) {       
         	((itp)(state.evaluator.p_problem)).describe(best_of_run[x],
         		state,x, statisticslog,Output.V_NO_GENERAL);

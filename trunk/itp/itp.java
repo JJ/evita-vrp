@@ -17,7 +17,7 @@ public class itp extends Problem implements SimpleProblemForm {
 	private static final long serialVersionUID = 1L;
 	public ITPdata input;
 	public ArrayList<Route> allRoutes;
-	public double minCost;
+	private double minCost = 2147483647;
 	public static final int  MON = 16; 
 	public static final int  TUES = 8;
 	public static final int  WED = 4;
@@ -32,11 +32,10 @@ public class itp extends Problem implements SimpleProblemForm {
 	// Load all the problem data;	
 		input = new ITPdata();
 		input.setup(state, base);
-		minCost = 2^31 -1;
 	}  
 	
 	public double calculateInventoryCost(PatternVectorIndividual ind){
-		System.out.printf("invCost..");
+		//System.out.printf("invCost..");
 		double cost = 0.0;
 		// Beware of shop 0; it's the warehouse in the shopList but not in the genome
 		// nShops is including it
@@ -47,7 +46,7 @@ public class itp extends Problem implements SimpleProblemForm {
 			input.shopList.get(i).calculateCurrentValues(curFreq);
 			cost += input.shopList.get(i).currentInventoryCost;
 		}
-		System.out.printf("done ");
+		//System.out.printf("done ");
 		return cost;
 	}
 	public double calculateTransportCost(PatternVectorIndividual ind){
@@ -67,10 +66,15 @@ public class itp extends Problem implements SimpleProblemForm {
 	public double calculateCost(PatternVectorIndividual ind){
 		double i_cost = calculateInventoryCost(ind);
 		double t_cost = calculateTransportCost( ind);
-		System.out.println("inventory cost "+i_cost + " transport cost= " + t_cost );
+		//System.out.println("inventory cost "+i_cost + " transport cost= " + t_cost );
 		  
 		return (i_cost + t_cost);
 	}
+	
+	public double getMinCost(){
+		return minCost;
+	}
+	
 	public void evaluate(EvolutionState state, Individual ind, int threadnum) {
 	   	if (ind.evaluated) return;
 
