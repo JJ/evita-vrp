@@ -25,11 +25,16 @@ public class ITPdata extends ProblemData{
 	public double [] currentFrequency;
 	public double [] currentDeliverySize;
 	public int [] admissiblePatterns;
-	
+	public String whichVRP;	
 
 	public static final String P_PATDATAFILE = "patdatafile";
 	public static final String P_DATAFILE = "datafile";
 	public static final String P_GEODATAFILE = "geodatafile";
+	public static final String P_VEHICLEDATAFILE = "vehicledatafile";
+	
+	public static final String P_WHICHVRPSOLVER = "whichvrp";
+	
+
 	
     /** Given a file name, return a BufferedReader object for that file
 	or null if the file could not be found or there is some other
@@ -132,6 +137,36 @@ public class ITPdata extends ProblemData{
     		System.out.println("readMatrix I/O error: " + e );
 	    	}
     } 
+    
+    private void readVehicleData(BufferedReader reader )
+    {	
+    	try {
+    	   	// read any blank lines before the actual data
+    		String line = null;
+    		do {
+    			line = reader.readLine();
+    		} while (line != null && line.trim().equals(""));
+
+    		maximumWorkTime =  Double.valueOf( line ).doubleValue();
+	    	line = reader.readLine();
+
+			speed =  Double.valueOf(line).doubleValue();// Km/h
+			line = reader.readLine();
+			costPerKm =   Double.valueOf(line).doubleValue();	// euro
+			line = reader.readLine();
+			downloadTime =   Double.valueOf(line).doubleValue(); // 15 minutes
+			line = reader.readLine();
+			vehicleCapacity = Integer.valueOf(line).intValue();// roll containers
+			
+			System.out.println("WorkTime: " + maximumWorkTime + " speed: "+ speed
+					+ " costPerKm: " + costPerKm 
+					+ " downloadTime: " + downloadTime 
+					+ " vehicle capacity: " + vehicleCapacity);
+    	}
+    	catch (IOException e) {
+    		System.out.println("readMatrix I/O error: " + e );
+	    	}
+    }
 
 /** Build table of distances between shops (and the warehouse)
  	* @param 
@@ -193,12 +228,14 @@ public class ITPdata extends ProblemData{
 	    return sum;
 	 }
 /**
- * Reads all three datafiles and builds the necessary data matrices
+ * Reads all four datafiles and builds the necessary data matrices
  */
     public void setup(final EvolutionState state, final Parameter base){
-		String patdatafile = "jorgito";
-		String datafile = "pepito";
-		String geodatafile = "juanito" ;
+		String patdatafile = "los patrones";
+		String datafile = "las tiendas";
+		String geodatafile = "el mapa" ;
+		String vehicledatafile = "Lightning McQueen";
+		String which = "none";
 	       
 		try{
 	    	datafile = state.parameters.getString(base.push(P_DATAFILE),null);
@@ -225,17 +262,24 @@ public class ITPdata extends ProblemData{
 		catch(Exception e){
 	    	state.output.fatal(patdatafile + ": File data wrong or not found, did you call it " + P_PATDATAFILE + "?");
 		}
+		try{
+	    	vehicledatafile = state.parameters.getString(base.push(P_VEHICLEDATAFILE),null);
+	    	if( vehicledatafile == null ) throw new Exception("Data file not specified.");
+	    	readVehicleData(getBufferedReader(vehicledatafile));
+	    	}
+		catch(Exception e){
+	    	state.output.fatal(vehicledatafile + ": File data wrong or not found, did you call it " + P_VEHICLEDATAFILE + "?");
+		}
+		try{
+	    	which = state.parameters.getString(base.push(P_WHICHVRPSOLVER),null);
+	    	if( which == null ) throw new Exception("No VRP method specified.");
+	    	whichVRP = which;
+	    	System.out.println("VRP method: " + whichVRP );
+	    	}
+		catch(Exception e){
+	    	state.output.fatal(whichVRP + ": VRP method not found, did you call it " + P_WHICHVRPSOLVER + "?");
+		}
 		buildDeliverySizeTable();
-	       
-		// These data are exclusively for the VRP
-		// Do I need them here?
-		maximumWorkTime = 8.0; // Assume a working day of 8 hours
-		// These values correspond to the small truck
-		// Do we need to create a class Vehicle?
-		speed = 60; 			// Km/h
-		costPerKm = 0.6; 	// euro
-		downloadTime = 0.25; // 15 minutes
-		vehicleCapacity = 12;// roll containers
-	}
- 
+
+    }
 }

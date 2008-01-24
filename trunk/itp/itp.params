@@ -49,3 +49,5 @@ eval.problem		= ec.app.itp.itp
 eval.problem.datafile = shopdata.txt
 eval.problem.geodatafile = geodata.txt
 eval.problem.patdatafile = admissiblepatterns.txt
+eval.problem.vehicledatafile = vehicledata.txt
+eval.problem.whichvrp = CWLS

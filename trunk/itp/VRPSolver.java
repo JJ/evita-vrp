@@ -15,9 +15,9 @@ public abstract class VRPSolver extends Problem{
 	public ArrayList <Shop> shops4Today;
 	
 	/**Solution of the problem*/
-	public Routes4ADay routes4Today;
+	public Routes4ADay bestSolution;
 	
-	/**The depot ¿^_^ */
+	/**The depot ^_^ */
 	public Shop Depot;
 	
 	/**Data of ITPdata*/
@@ -33,19 +33,20 @@ public abstract class VRPSolver extends Problem{
 		
 		super.setup(state,base);
 		
-		//Copiamos la lista de tiendas
+		//We copy the shop list 
 		shops4Today = (ArrayList <Shop>) List.clone();
 		
-		//creamos una solucion vacia
+		//we create a void solution
 		ArrayList <Integer> ListaTiendas = (ArrayList <Integer>) new ArrayList <Integer>();		
 		for (int i =0;i<List.size();i++){
 			Integer I = Integer.valueOf(List.get(i).shopID);
 			ListaTiendas.add(I);
-		}		
-		routes4Today = new Routes4ADay(ListaTiendas, dayOfWeek);
+		}	
+		
+		bestSolution = new Routes4ADay(ListaTiendas, dayOfWeek);
 		
 		
-		//Creamos la tienda para el almacen
+		//we create a shop for warehouse
 		Depot = input.shopList.get(0);
 		
 		

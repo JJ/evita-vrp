@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ec.EvolutionState;
 import ec.Individual;
 import ec.Problem;
-import ec.app.vrp1.Route;
+//import ec.app.vrp1.Route;
 import ec.app.vrp1.Shop;
 import ec.simple.SimpleFitness;
 import ec.simple.SimpleProblemForm;
@@ -16,15 +16,18 @@ import ec.vector.PatternVectorIndividual;
 public class itp extends Problem implements SimpleProblemForm {
 	private static final long serialVersionUID = 1L;
 	public ITPdata input;
-	public ArrayList<Route> allRoutes;
-	private double minCost = 2147483647;
+	public Routes4ADay weeklyRoutes;
+	public VRPmethod whichVRPmethod;
+	private static double minCost = 2147483647;
 	public static final int  MON = 16; 
 	public static final int  TUES = 8;
 	public static final int  WED = 4;
 	public static final int  THURS = 2;
 	public static final int  FRI = 1;
 	public int WEEK[] = {MON,TUES, WED, THURS, FRI};
+	public enum VRPmethod { CWLS, ACO, TS, EC };
 
+	
 	public void setup(final EvolutionState state, final Parameter base)
 	{
 		// very important, remember this
@@ -32,7 +35,29 @@ public class itp extends Problem implements SimpleProblemForm {
 	// Load all the problem data;	
 		input = new ITPdata();
 		input.setup(state, base);
+		//Decide which VRP algorithm will be used
+		selectVRPalgorithm();
+		
 	}  
+	
+	private void selectVRPalgorithm(){
+		if (input.whichVRP.equals("CWLS")){
+			whichVRPmethod = VRPmethod.CWLS;
+//			System.out.printf("CWLS");
+		}
+		else if (input.whichVRP.equals("ACO")){
+			whichVRPmethod = VRPmethod.ACO;
+//			System.out.printf("ACO");
+		}
+		else if (input.whichVRP.equals("TS")){
+			whichVRPmethod = VRPmethod.TS;
+//			System.out.printf("TS");
+		}
+		else {//(input.whichVRP.equals("EC"))
+			whichVRPmethod = VRPmethod.EC;
+//		System.out.printf("Lo que hay:(" + input.whichVRP+ ")");
+	}
+	}
 	
 	public double calculateInventoryCost(PatternVectorIndividual ind){
 		//System.out.printf("invCost..");
@@ -49,7 +74,8 @@ public class itp extends Problem implements SimpleProblemForm {
 		//System.out.printf("done ");
 		return cost;
 	}
-	public double calculateTransportCost(PatternVectorIndividual ind){
+	public double calculateTransportCost(EvolutionState state,
+			PatternVectorIndividual ind, int threadnum){
 		double cost = 0.0;
 		ArrayList<ArrayList<Shop>> allWeek;
 		allWeek = new ArrayList<ArrayList<Shop>>();
@@ -58,14 +84,28 @@ public class itp extends Problem implements SimpleProblemForm {
 			ArrayList<Shop> shops4Today = new ArrayList<Shop>();
 			shops4Today = whichShopsToday(ind, WEEK[i]);
 			allWeek.add(shops4Today);
+			Parameter base = defaultBase(); //out of the sleeve
+			switch (whichVRPmethod){
+				case CWLS: 
+					CWLS solver =  new CWLS(state, base, input,shops4Today, WEEK[i]);
+					solver.findRoutes(state, threadnum);
+					break;
+				case ACO: 
+					break;
+				case TS:
+					break;
+				default:
+				//	System.out.printf(".");
+					break;
+			}
 			cost += shops4Today.size();
 		}
 		
 		return cost;
 	}
-	public double calculateCost(PatternVectorIndividual ind){
+	public double calculateCost(EvolutionState state,PatternVectorIndividual ind,int threadnum){
 		double i_cost = calculateInventoryCost(ind);
-		double t_cost = calculateTransportCost( ind);
+		double t_cost = calculateTransportCost(state, ind, threadnum);
 		//System.out.println("inventory cost "+i_cost + " transport cost= " + t_cost );
 		  
 		return (i_cost + t_cost);
@@ -84,7 +124,7 @@ public class itp extends Problem implements SimpleProblemForm {
         
         
         //Instead of this, i should try to minimise the cost
-        double cost = calculateCost(ind2);
+        double cost = calculateCost(state, ind2, threadnum);
         if (cost < minCost) minCost = cost;
         double myfit = 1/(1+ cost);
 
