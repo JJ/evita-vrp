@@ -7,11 +7,17 @@ import ec.util.Parameter;
 import ec.app.vrp1.Shop;
 import ec.app.vrp1.Route;
 
+
+/**Class to solve the VRP using Clarke & Wright algorithm 
+ * 
+ * @author Anais Martinez Garcia
+ *
+ */
 public class CWLS extends VRPSolver {
 
 	private static final long serialVersionUID = 1L;
 	
-	/**Solution of execution*/
+	/**Internal solution of execution*/
     private ArrayList<Integer> posicionLista;
     private ArrayList<Integer> tiendaLista;
         
@@ -36,10 +42,9 @@ public class CWLS extends VRPSolver {
 	public void findRoutes(final EvolutionState state, final int thread){
 		
 		
-		//1. Construimos las rutas de la forma 
-        // (Almacen,tienda_1,Almacen,tienda_2,Almacen,...,Almacen,tienda_n ,Almacen)
-		// de la lista de tiendas shops4Today
-		//
+		/*1. Makes routes (Warehouse, shop_1, Warehouse, shop_2, Warehouse, ..., 
+		 * Warehouse, shop_n ,Warehouse), with the shops from the list shops4Today
+		 */
        
 
         for (int i = 0;i<shops4Today.size();i++){            
@@ -56,8 +61,8 @@ public class CWLS extends VRPSolver {
         
         double [][] costes = new double [num_rutas][num_rutas];
         
-        //1. calculamos los costes iniciales de la forma
-        //s(i,j) = coste(i,Almacen) + coste(Almacen,j) - cost(i,j)
+        //2. Calculates initial cost:
+        //s(shop_i,shop_j) = coste(shop_i,Wharehouse) + coste(Wharehouse,shop_j) - cost(shop_i,shop_j)
         for (int i=0;i<num_rutas;i++)
             for (int j=0;j<num_rutas;j++){
             	if (i==j)
@@ -80,25 +85,25 @@ public class CWLS extends VRPSolver {
         
         boolean encontrado = false;
         
-        //2. Hacemos combinaciones de rutas mientras sea posible
+        //3. Combining routes wherever possible
         int k = num_rutas;
         int i =0;  
         
         boolean sigue = true;
         while(sigue){
-                //obtenemos la mejor union
+                //Best union
                 int [] r_mejores = maximo(costes);
                 if (r_mejores[0]== -1  && r_mejores[1] == -1){
-                	//si todos los costes son 0 terminamos
+                	//All costs are 0
                     sigue = false;
                 }
                 else{
                     r_mejores[0]++;
                     r_mejores[1]++;
-                    //si es posible, hacemos la combinacion
+                    //Makes the combination 
                     if (combinacion_posible(r_mejores)){
                         combina(r_mejores);
-                         //no consideramos mas esa combinacion
+                         //Forget this combination
                         costes = elimina(r_mejores[1]-1,costes);
                         num_rutas --; 
                     }
@@ -108,20 +113,20 @@ public class CWLS extends VRPSolver {
                 }
             }
         
-            //si no se ha producido ninguna combinacion  mas terminamos
+           
 
       
         
-        //3. Mejoramos las rutas por separado
+        //4. Improves each of the routes
         mejora_rutas();
     
     
         
-        //4. Mejoramos haciendo intercambios entre rutas
+        //5. Improves exchange shops in routes
         intercambio_rutas();
             
         
-        //5. Copiamos la solución obtenida a routes4Today
+        //6. Copies the internal solution to bestSolution
         convertir_a_rutas();
  
    
@@ -166,7 +171,7 @@ public class CWLS extends VRPSolver {
         
         double carga = 0;
         
-        //caculamos el coste de unir las dos rutas
+        //Calculates cost of join two routes
         int actual = tiendaLista.get(ruta_i[0]).intValue();
         for (int pos = ruta_i[0] + 1;pos<ruta_i[1];pos++){            
             int siguiente = tiendaLista.get(pos).intValue();            
@@ -224,8 +229,7 @@ public class CWLS extends VRPSolver {
          }
          
          
-         //si rutas[0] está despues que rutas[1], como hemos quitado
-         //rutas[1] tenemos que disminuir rutas[0]
+         //if rutas[0] is behind rutas[1], we have to reduce rutas[0]
          if (rutas[1]<rutas[0])
         	 rutas[0]--;
          
@@ -277,20 +281,20 @@ public class CWLS extends VRPSolver {
        int pos_fin = 0;
        for (int i=0;i<num_rutas;i++){
            
-           //Busqueda de los limites de la ruta en la solucion
+           //search the limits of the route in solution
            int pos_inic = pos_fin;
            
            pos_fin++;
            while (tiendaLista.get(pos_fin).intValue()!=0)
                pos_fin++;
            
-           //calculamos el coste incial de la ruta
+           //Calculates initial cost in route
            double c1 = coste_ruta(pos_inic,pos_fin);
            
            
            for (int j=pos_inic+1;j<pos_fin;j++)
                for (int k=pos_inic+1;k<pos_fin;k++){
-                   //probamos a intercambiar dos tiendas
+                   //Tests to exchange two shops
                    Integer tienda = tiendaLista.get(j);
                    tiendaLista.set(j,tiendaLista.get(k));
                    tiendaLista.set(k,tienda);
@@ -302,11 +306,11 @@ public class CWLS extends VRPSolver {
                    
                    double c2 = coste_ruta(pos_inic,pos_fin);
                    
-                   //si el coste resultante es menor dejamos el cambio
+                   //If final cost is better than old result, we accept the change
                    if (c2 < c1)
                        c1 = c2;
                    else{
-                       // si no deshacemos el cambio
+                       //if final cost is worse than old result, we don't accept the change
                 	   tienda = tiendaLista.get(j);
                        tiendaLista.set(j,tiendaLista.get(k));
                        tiendaLista.set(k,tienda);
@@ -330,7 +334,7 @@ public class CWLS extends VRPSolver {
        
        inicio[0] = 0;
        
-       //posiciones de inicio de cada ruta
+       //Initial positions in each route
        int nr = 1;
        for (int j=1;j<tiendaLista.size();j++)
            if (tiendaLista.get(j).intValue() == 0){
@@ -353,7 +357,7 @@ public class CWLS extends VRPSolver {
                
                for (int a = pos_inic_i+1;a<pos_fin_i;a++){                  
                    for (int b = pos_inic_j+1;b<pos_fin_j;b++){
-                       //probamos a intercambiar una a una las tiendas de las rutas
+                       //We probe to excange the shops of routes
                 	   Integer tienda = tiendaLista.get(a);
                        tiendaLista.set(a,tiendaLista.get(b));
                        tiendaLista.set(b,tienda);
@@ -370,7 +374,7 @@ public class CWLS extends VRPSolver {
                            c_j = c_j2;                          
                        }
                        else{
-                           //si el coste de ambas rutas no es menor, deshacemos el cambio
+                           //if the cost of both routes isn't less than old routes, we don't accept the change
                     	   tienda = tiendaLista.get(a);
                            tiendaLista.set(a,tiendaLista.get(b));
                            tiendaLista.set(b,tienda);
@@ -404,8 +408,7 @@ public class CWLS extends VRPSolver {
     	 
     	 int actual = 0;
     	 for (int i=1; i<posicionLista.size();i++){
-    		 //si llegamos al almacen metemos el almacen y terminamos
-    		 //esta ruta
+    		 //if this shop is warehouse, we insert warehouse and we finish this route
     		     	
     		 int siguiente = tiendaLista.get(i).intValue();
     		 if (siguiente == 0){
@@ -413,9 +416,9 @@ public class CWLS extends VRPSolver {
     			R.cost += coste_trayecto(siguiente,0);
     			
     			R.time += distanceTable[actual][siguiente]/speed;
-    			routes4Today.addRoute(R);
+    			bestSolution.addRoute(R);
     			
-    			//Nueva ruta
+    			//new route
     			R = new Route();
     			R.shopsVisited.add(Depot);    			
     		 }
