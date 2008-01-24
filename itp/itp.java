@@ -60,18 +60,14 @@ public class itp extends Problem implements SimpleProblemForm {
 	}
 	
 	public double calculateInventoryCost(PatternVectorIndividual ind){
-		//System.out.printf("invCost..");
 		double cost = 0.0;
 		// Beware of shop 0; it's the warehouse in the shopList but not in the genome
 		// nShops is including it
 		for (int i = 0; i < input.nShops -1; i++){
-//			System.out.print("shop " + i + " pat " );
-//			System.out.print( ind.genome[i] + " ");
 			int curFreq = input.calculateFrequencyForPattern(ind.genome[i]);			
 			input.shopList.get(i).calculateCurrentValues(curFreq);
 			cost += input.shopList.get(i).currentInventoryCost;
 		}
-		//System.out.printf("done ");
 		return cost;
 	}
 	public double calculateTransportCost(EvolutionState state,
@@ -79,26 +75,33 @@ public class itp extends Problem implements SimpleProblemForm {
 		double cost = 0.0;
 		ArrayList<ArrayList<Shop>> allWeek;
 		allWeek = new ArrayList<ArrayList<Shop>>();
+		Routes4ADay[] bestRoutes = new Routes4ADay[5];
 		
 		for (int i= 0; i < WEEK.length; i++) {
 			ArrayList<Shop> shops4Today = new ArrayList<Shop>();
 			shops4Today = whichShopsToday(ind, WEEK[i]);
 			allWeek.add(shops4Today);
 			Parameter base = defaultBase(); //out of the sleeve
+			VRPSolver solver;
 			switch (whichVRPmethod){
 				case CWLS: 
-					CWLS solver =  new CWLS(state, base, input,shops4Today, WEEK[i]);
-					solver.findRoutes(state, threadnum);
+					solver =  new CWLS(state, base, input,shops4Today, WEEK[i]);
 					break;
 				case ACO: 
+					solver =  new ACO(state, base, input,shops4Today, WEEK[i]);					
 					break;
-				case TS:
+/*				case TS:
 					break;
+				case EC:
+					break;*/
 				default:
-				//	System.out.printf(".");
+					System.out.println("Why am I getting here?");
+					solver =  new CWLS(state, base, input,shops4Today, WEEK[i]);
 					break;
 			}
-			cost += shops4Today.size();
+			solver.findRoutes(state, threadnum);
+			bestRoutes[i] = solver.bestSolution;
+			cost += solver.bestSolution.cost;	
 		}
 		
 		return cost;
