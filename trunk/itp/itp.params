@@ -17,7 +17,7 @@ quit-on-run-complete	= true
 
 
 pop.subpop.0.duplicate-retries 	= 0
-pop.subpop.0.species.fitness 		= ec.app.CostFitness
+pop.subpop.0.species.fitness 		= ec.app.itp.CostFitness
 pop.subpop.0.species 		= ec.vector.IntegerVectorSpecies
 pop.subpop.0.species.ind	= ec.vector.PatternVectorIndividual
 
@@ -50,4 +50,4 @@ eval.problem.datafile = shopdata.txt
 eval.problem.geodatafile = geodata.txt
 eval.problem.patdatafile = admissiblepatterns.txt
 eval.problem.vehicledatafile = vehicledata.txt
-eval.problem.whichvrp = ACO
+eval.problem.whichvrp = CWLS
