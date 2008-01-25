@@ -7,7 +7,7 @@ import ec.Individual;
 import ec.Problem;
 //import ec.app.vrp1.Route;
 import ec.app.vrp1.Shop;
-import ec.simple.SimpleFitness;
+//import ec.simple.SimpleFitness;
 import ec.simple.SimpleProblemForm;
 import ec.util.Parameter;
 import ec.vector.PatternVectorIndividual;
@@ -68,6 +68,9 @@ public class itp extends Problem implements SimpleProblemForm {
 			input.shopList.get(i).calculateCurrentValues(curFreq);
 			cost += input.shopList.get(i).currentInventoryCost;
 		}
+		//Assign the inventoryCost fitness directly here
+		CostFitness c = ((CostFitness)ind.fitness);
+    	c.inventoryCost = cost;
 		return cost;
 	}
 	public double calculateTransportCost(EvolutionState state,
@@ -103,16 +106,18 @@ public class itp extends Problem implements SimpleProblemForm {
 			bestRoutes[i] = solver.bestSolution;
 			cost += solver.bestSolution.cost;	
 		}
-		
+		//Assign these attributes of the fitness directly here
+		CostFitness c = ((CostFitness)ind.fitness);
+    	c.transportCost = cost;
+		c.bestRoutes = bestRoutes;
 		return cost;
 	}
-	public double calculateCost(EvolutionState state,PatternVectorIndividual ind,int threadnum){
+/*	public double calculateCost(EvolutionState state,PatternVectorIndividual ind,int threadnum){
 		double i_cost = calculateInventoryCost(ind);
 		double t_cost = calculateTransportCost(state, ind, threadnum);
-		//System.out.println("inventory cost "+i_cost + " transport cost= " + t_cost );
-		  
+		//System.out.println("inventory cost "+i_cost + " transport cost= " + t_cost );		  
 		return (i_cost + t_cost);
-	}
+	}*/
 	
 	public double getMinCost(){
 		return minCost;
@@ -124,28 +129,31 @@ public class itp extends Problem implements SimpleProblemForm {
     	if (!(ind instanceof PatternVectorIndividual))
     		state.output.fatal("Whoa!  It's not a PatternVectorIndividual!!!",null);
         PatternVectorIndividual ind2 = (PatternVectorIndividual)ind;
+    	if (!(ind.fitness instanceof CostFitness))
+    		state.output.fatal("Whoa!  It's not a CostFitness!!!",null);       
         
-        
-        //Instead of this, i should try to minimise the cost
-        double cost = calculateCost(state, ind2, threadnum);
-        if (cost < minCost) minCost = cost;
-        double myfit = 1/(1+ cost);
-
-
-    	if (!(ind.fitness instanceof SimpleFitness))
-    		state.output.fatal("Whoa!  It's not a SimpleFitness!!!",null);
-    	((SimpleFitness)ind.fitness).setFitness(state,
-                                    /// ...the fitness...
-                                    (float) myfit,
-                                    ///... is the individual ideal?  Indicate here...
-                                    myfit == 1);
+        double invcost = calculateInventoryCost(ind2);
+        double transcost = calculateTransportCost(state, ind2, threadnum);
+        double cost = invcost + transcost;
+        if (cost < minCost) {
+ //       	System.out.println(cost +" is better than " + minCost);
+        	minCost = cost;
+        }  	
+    	CostFitness c = (CostFitness)ind.fitness;
+    	c.totalCost = cost;
+   	
     	ind2.evaluated = true;       
 	}
 
 	public void describe(Individual ind, EvolutionState state, int threadnum,
 			int log, int verbosity) {
-		// TODO Auto-generated method stub
-		System.out.printf("Minimum Cost " + minCost);
+		System.out.println("Minimum Cost " + minCost);
+		((CostFitness)ind.fitness).printRoutes(state,log,verbosity);
+		CostFitness c = (CostFitness)ind.fitness;
+		state.output.println("Total cost: "+c.totalCost + " ", verbosity,log );
+		state.output.println("Inventory cost: "+c.inventoryCost + " ", verbosity,log );
+		state.output.println("Transport cost: "+c.transportCost + " ", verbosity, log);
+		state.output.println("", verbosity,log );
 	}
 
 	/**

@@ -75,5 +75,27 @@ public class CostFitness extends SimpleFitness
     	    	
         return result;
         }
-
+    /** Print routes for the solution
+     * 
+     */
+     public void printRoutes(final EvolutionState state, final int log, 
+    		 final int verbosity)
+     {
+       	for (int i = 0; i < bestRoutes.length; i++){
+       		int size = bestRoutes[i].routes4Today.size();
+       		state.output.println("Day " + i +" ("+ size +" routes)",verbosity, log);
+           	for (int j = 0; j < size; j++){
+           		bestRoutes[i].routes4Today.get(j).printRouteShort(state,log,verbosity); 
+           	}
+           	state.output.println("",verbosity, log);
+           	state.output.println("",verbosity, log);
+       	} 	
+     }
+     public void printFitnessForHumans(final EvolutionState state, final int log, 
+    		 final int verbosity)
+     {
+		state.output.print("Total cost: "+totalCost, verbosity,log );
+		state.output.print("\tInventory cost: "+ inventoryCost, verbosity,log );
+		state.output.println("\tTransport cost: "+ transportCost, verbosity, log);	 
+     }
     }
