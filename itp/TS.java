@@ -2,12 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package itp;
+package ec.app.itp;
 
 import ec.EvolutionState;
-import itp.ITPdata;
-import itp.Routes4ADay;
-import itp.VRPSolver;
 import ec.app.vrp1.Route;
 import ec.app.vrp1.Shop;
 import ec.util.Parameter;
@@ -29,7 +26,7 @@ public class TS extends VRPSolver {
     private ITPdata data;
     private List<Shop> shops;
     private int thisDay;
-    private int MAX_ITERATIONS = 100;
+    private int MAX_ITERATIONS = 60;
     private int TL_SIZE = 12;
 
     public TS(EvolutionState state, Parameter base, ITPdata input, ArrayList<Shop> List, int dayOfWeek) {
@@ -46,6 +43,7 @@ public class TS extends VRPSolver {
 
 
         VRPSolution initial = new VRPSolution();
+        //this.data.printDistanceTable();
         try {
             initial.setAsInitialSolution(this.Depot, shops, data);
         } catch (IncompatibleSolutionException ex) {
@@ -53,7 +51,6 @@ public class TS extends VRPSolver {
                     "the given data (" + ex.getLocalizedMessage() + ")");
             return;
         }
-
 
 
         //Creates the move manager
