@@ -65,9 +65,12 @@ public class itp extends Problem implements SimpleProblemForm {
 		// nShops is including it
 		for (int i = 0; i < input.nShops -1; i++){
 			int curFreq = input.calculateFrequencyForPattern(ind.genome[i]);			
-			input.shopList.get(i).calculateCurrentValues(curFreq);
-			cost += input.shopList.get(i).currentInventoryCost;
+			input.shopList.get(i+1).calculateCurrentValues(curFreq);
+			double curInvCost =  input.shopList.get(i+1).currentInventoryCost;
+			//System.out.print(i +"(" + ind.genome[i]+ ";" + curFreq + ";" + curInvCost + ") ");
+			cost +=curInvCost;
 		}
+		//System.out.println();
 		//Assign the inventoryCost fitness directly here
 		CostFitness c = ((CostFitness)ind.fitness);
     	c.inventoryCost = cost;
