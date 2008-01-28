@@ -24,7 +24,7 @@ pop.subpop.0.species.ind	= ec.vector.PatternVectorIndividual
 pop.subpop.0.species.min-gene	= 1
 pop.subpop.0.species.max-gene 	= 31
 
-pop.subpop.0.species.genome-size	= 20
+pop.subpop.0.species.genome-size	= 31
 pop.subpop.0.species.crossover-type	= two
 # Xover should ensure that patterns are admissible
 pop.subpop.0.species.crossover-prob	= 1
@@ -46,8 +46,8 @@ data        = ec.app.itp.ITPdata
 
 
 eval.problem		= ec.app.itp.itp
-eval.problem.datafile = shopdata.txt
-eval.problem.geodatafile = geodata.txt
-eval.problem.patdatafile = admissiblepatterns.txt
-eval.problem.vehicledatafile = vehicledata.txt
+eval.problem.datafile = data/shopdata32.txt
+eval.problem.geodatafile = data/geodata32.txt
+eval.problem.patdatafile = data/admissiblepatterns.txt
+eval.problem.vehicledatafile = data/vehicledata.txt
 eval.problem.whichvrp = CWLS

@@ -1,0 +1,4 @@
+java ec.Evolve -file ec/app/itp/itp.params -p stat.file=aco/out32.stat -p eval.problem.geodatafile=data/geodata32.txt -p eval.problem.datafile=data/shopdata32.txt -p pop.subpop.0.species.genome-size=31 -p jobs=30 -p eval.problem.whichvrp=ACO
+java ec.Evolve -file ec/app/itp/itp.params -p stat.file=aco/out33.stat -p eval.problem.geodatafile=data/geodata33.txt -p eval.problem.datafile=data/shopdata33.txt -p jobs=30 -p pop.subpop.0.species.genome-size=32 -p eval.problem.whichvrp=ACO
+java ec.Evolve -file ec/app/itp/itp.params -p stat.file=aco/out35.stat -p eval.problem.geodatafile=data/geodata35.txt -p eval.problem.datafile=data/shopdata35.txt -p jobs=30 -p pop.subpop.0.species.genome-size=34 -p eval.problem.whichvrp=ACO
+
