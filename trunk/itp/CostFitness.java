@@ -91,6 +91,9 @@ public class CostFitness extends SimpleFitness
            	state.output.println("",verbosity, log);
        	} 	
      }
+     /** Print all the fields of the cost
+      * 
+      */
      public void printFitnessForHumans(final EvolutionState state, final int log, 
     		 final int verbosity)
      {

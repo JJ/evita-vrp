@@ -93,4 +93,14 @@ public class Route  {
 					distanceTravelled ,cost , time, demand );*/
 		}
 	}
+	
+	public void printRouteShort(final EvolutionState state, final int log, final int verbosity){
+		if (shopsVisited.size() > 0){
+			state.output.print("(",verbosity, log);			
+			for (int i = 0; i < shopsVisited.size() -1; i++)
+				state.output.print(shopsVisited.get(i).shopID + ", ",verbosity, log);
+			state.output.print(shopsVisited.get(shopsVisited.size() -1).shopID + ") ",
+					verbosity, log);
+		}
+	}
 }

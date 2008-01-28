@@ -674,8 +674,8 @@ public class ACO extends VRPSolver {
              //Only one route-> exchange shops
              ArrayList<Integer> temp = (ArrayList <Integer>) mejorSolucion.clone();  
              double c = mejor_coste_ejecucion;
-             for (int s1=1;s1<temp.size();s1++)
-                 for (int s2=1;s2<temp.size();s2++){
+             for (int s1=1;s1<temp.size()-1;s1++)
+                 for (int s2=1;s2<temp.size()-1;s2++){
                      if (s1!=s2){
                          Integer k = temp.get(s1);
                          temp.set(s1, temp.get(s2));
@@ -714,10 +714,10 @@ public class ACO extends VRPSolver {
                  int explotacion = factor*Math.max(s1,s2);
                  for (int i = 0; i<explotacion;i++){
                      
-                     //Excanges two shops each iteration
+                     //Exchanges two shops each iteration
 
-                     int t1 = (int) ((double) s1*state.random[thread].nextDouble())+1;                     
-                     int t2 = (int) ((double) s2*state.random[thread].nextDouble()) + p.get(0)+1;
+                     int t1 = (int) ((double) s1*state.random[thread].nextDouble()) + 1;                     
+                     int t2 = (int) ((double) s2*state.random[thread].nextDouble()) + p.get(0) + 1;
                      
                                           
                      Integer t = temp.get(t1);                     
@@ -740,10 +740,10 @@ public class ACO extends VRPSolver {
                      
              }
              else{
-                 //More than two routes -> excanges parts of routes
+                 //More than two routes -> exchanges parts of routes
                  
                  int explotacion = factor*nrutas;
-                 //Size of neighbourhood: factor*nrutas
+                 //Size of neighborhood: factor*nrutas
                  for(int i = 0; i<explotacion;i++){
                      
                      //Searches of routes 
@@ -798,7 +798,7 @@ public class ACO extends VRPSolver {
 
                      }
 
-                   //We choose half of size of route 1 (removes them) and we copy the shops
+                   //We choose half of size of route 2 (removes them) and we copy the shops
 
 
                      k2 = (p.get(Ruta2)).intValue();
