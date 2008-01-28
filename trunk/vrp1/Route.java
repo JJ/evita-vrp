@@ -33,13 +33,19 @@ public class Route  {
   Calculate the route length. We must ensure the warehouse appears at the begining
   and the end of the route 
  * */
-	public double calculateDistance(ITPdata data){
+	public double calculateDistance(VRPdata data){
 	
 		distanceTravelled = 0.0;
 		demand = data.shopList.get(0).currentDeliverySize;
-		for (int i= 1; i <= shopsVisited.size(); i++){
-			distanceTravelled += data.distanceTable[i-1][i];
-			demand += data.shopList.get(i).currentDeliverySize;
+		for (int i= 1; i < shopsVisited.size(); i++){
+                    Shop actual = shopsVisited.get(i);
+                    Shop previous = shopsVisited.get(i-1);
+                    int idActual = Integer.parseInt(actual.shopID);
+                    int idPrevious = Integer.parseInt(previous.shopID);
+			//distanceTravelled += data.distanceTable[i-1][i];
+			//demand += data.shopList.get(i).currentDeliverySize;
+                    distanceTravelled += data.distanceTable[idPrevious][idActual];
+                    demand += data.shopList.get(idActual).currentDeliverySize;
 		}
 		return distanceTravelled;
 	}
@@ -103,4 +109,13 @@ public class Route  {
 					verbosity, log);
 		}
 	}
+        
+        public String toString(){
+            String outP ="";
+            for (int i= 0; i < shopsVisited.size(); i++){
+			
+			outP += this.shopsVisited.get(i).shopID+" ";
+		}
+            return outP;
+        }
 }
