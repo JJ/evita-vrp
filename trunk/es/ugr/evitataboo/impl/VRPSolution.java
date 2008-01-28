@@ -21,7 +21,7 @@ import java.util.List;
 public class VRPSolution implements Solution {
 
     ArrayList<Route> routes;
-    private int MAX_ITERATIONS = 1000; //To create an initial random solution
+    private int MAX_ITERATIONS = 100000; //To create an initial random solution
 
     public VRPSolution() {
         this.routes = new ArrayList<Route>();
@@ -58,8 +58,8 @@ public class VRPSolution implements Solution {
        // Shop theStore = data.shopList.get(0);
         Shop theStore = theDepot;
         boolean solutionInvalid = true;
-        for (int i = 1; i < data.shopList.size(); i++) {
-            Shop shop = data.shopList.get(i);
+        for (int i = 1; i < theShops.size(); i++) {
+            Shop shop = theShops.get(i);
             Route r = new Route();
             r.shopsVisited.add(theStore);
             r.shopsVisited.add(shop);
@@ -86,7 +86,7 @@ public class VRPSolution implements Solution {
             }
 
             solutionInvalid = false;
-
+            //Mejor habría que clonar antes!
             Collections.shuffle(theShops);
             for (Shop s : theShops) {
                 int numRoute = (int) (Math.random() * theShops.size());
@@ -97,6 +97,7 @@ public class VRPSolution implements Solution {
             double time = 0.0;
             double outatime = 0.0;
             for (Route r : newRoutes) {
+                outatime = 0.0;
                 r.shopsVisited.add(0, theStore);
                 r.shopsVisited.add(theStore);
 
@@ -107,14 +108,10 @@ public class VRPSolution implements Solution {
                     cost += r.calculateCost(data);
                     outatime += r.calculateTime(data);
                     time += outatime;
-                    if (r.demand > data.vehicleCapacity) {
+                    if (r.demand > data.vehicleCapacity || outatime > data.maximumWorkTime) {
                         solutionInvalid = true;
                     }
                 }
-            }
-
-            if (time > data.maximumWorkTime) {
-                solutionInvalid = true;
             }
 
 
