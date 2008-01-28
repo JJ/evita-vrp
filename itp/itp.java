@@ -96,9 +96,10 @@ public class itp extends Problem implements SimpleProblemForm {
 				case ACO: 
 					solver =  new ACO(state, base, input,shops4Today, WEEK[i]);					
 					break;
-/*				case TS:
+				case TS:
+                                        solver =  new TS(state, base, input,shops4Today, WEEK[i]);
 					break;
-				case EC:
+				/*case EC:
 					break;*/
 				default:
 					System.out.println("Why am I getting here?");
