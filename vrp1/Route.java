@@ -35,17 +35,25 @@ public class Route  {
  * */
 	public double calculateDistance(ITPdata data){
 	
+/*		distanceTravelled = 0.0;
+		demand = data.shopList.get(0).currentDeliverySize;
+		for (int i= 1; i <= shopsVisited.size(); i++){
+			distanceTravelled += data.distanceTable[i-1][i];
+			demand += data.shopList.get(i).currentDeliverySize;
+		}
+		return distanceTravelled;*/
+		
 		distanceTravelled = 0.0;
 		demand = data.shopList.get(0).currentDeliverySize;
 		for (int i= 1; i < shopsVisited.size(); i++){
-                    Shop actual = shopsVisited.get(i);
+                    Shop current = shopsVisited.get(i);
                     Shop previous = shopsVisited.get(i-1);
-                    int idActual = Integer.parseInt(actual.shopID);
+                    int idCurrent = Integer.parseInt(current.shopID);
                     int idPrevious = Integer.parseInt(previous.shopID);
 			//distanceTravelled += data.distanceTable[i-1][i];
 			//demand += data.shopList.get(i).currentDeliverySize;
-                    distanceTravelled += data.distanceTable[idPrevious][idActual];
-                    demand += data.shopList.get(idActual).currentDeliverySize;
+                    distanceTravelled += data.distanceTable[idPrevious][idCurrent];
+                    demand += data.shopList.get(idCurrent).currentDeliverySize;
 		}
 		return distanceTravelled;
 	}
@@ -109,13 +117,12 @@ public class Route  {
 					verbosity, log);
 		}
 	}
-        
-        public String toString(){
-            String outP ="";
-            for (int i= 0; i < shopsVisited.size(); i++){
-			
-			outP += this.shopsVisited.get(i).shopID+" ";
-		}
-            return outP;
-        }
+    public String toString(){
+        String outP ="";
+        for (int i= 0; i < shopsVisited.size(); i++){
+		
+		outP += this.shopsVisited.get(i).shopID+" ";
+	}
+        return outP;
+    }
 }
