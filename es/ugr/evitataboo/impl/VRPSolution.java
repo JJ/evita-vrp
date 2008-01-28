@@ -7,6 +7,7 @@ package es.ugr.evitataboo.impl;
 import ec.app.itp.ITPdata;
 import ec.app.vrp1.Route;
 import ec.app.vrp1.Shop;
+import es.ugr.evitataboo.IncompatibleSolutionException;
 import es.ugr.evitataboo.Solution;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 public class VRPSolution implements Solution {
 
     ArrayList<Route> routes;
+    private int MAX_ITERATIONS = 1000; //To create an initial random solution
 
     public VRPSolution() {
         this.routes = new ArrayList<Route>();
@@ -31,22 +33,12 @@ public class VRPSolution implements Solution {
 
     }
 
-    
-    
-
-       
-            ;
-
-
-
-
-           
-            @Override
-    public Object clone(){   
+    @Override
+    public Object clone() {
         VRPSolution copy = new VRPSolution();
         //copy.routes = (ArrayList<Route>)this.routes.clone();
         copy.routes = new ArrayList<Route>();
-        for(int i = 0; i < this.routes.size(); i++) {
+        for (int i = 0; i < this.routes.size(); i++) {
             Route r = new Route(this.routes.get(i));
             r.shopsVisited.clear();
             for (int j = 0; j < this.routes.get(i).shopsVisited.size(); j++) {
@@ -62,8 +54,9 @@ public class VRPSolution implements Solution {
      * Creates an initial solution 
      * @param data
      */
-    public void setAsInitialSolution(List<Shop> theShops, ITPdata data) {
-        Shop theStore = data.shopList.get(0);
+    public void setAsInitialSolution(Shop theDepot, List<Shop> theShops, ITPdata data) throws IncompatibleSolutionException {
+       // Shop theStore = data.shopList.get(0);
+        Shop theStore = theDepot;
         boolean solutionInvalid = true;
         for (int i = 1; i < data.shopList.size(); i++) {
             Shop shop = data.shopList.get(i);
@@ -73,10 +66,10 @@ public class VRPSolution implements Solution {
             r.shopsVisited.add(theStore);
             this.routes.add(r);
         }
-        System.out.println(this);
-       /* List<Shop> theShops = new ArrayList<Shop>();
+        
+        /* List<Shop> theShops = new ArrayList<Shop>();
         for (int i = 1; i < data.shopList.size(); i++) {
-            theShops.add(data.shopList.get(i));
+        theShops.add(data.shopList.get(i));
         }*/
 
 
@@ -126,7 +119,13 @@ public class VRPSolution implements Solution {
 
 
             this.routes = newRoutes;
-            System.out.println(this);
+            iterations++;
+            
+            if (iterations > MAX_ITERATIONS) {
+                throw new IncompatibleSolutionException("Could not create an " +
+                        "initial solution in " + MAX_ITERATIONS + " iterations");
+            }
+            
         } while (solutionInvalid);
 
 
