@@ -33,7 +33,7 @@ public class Route  {
   Calculate the route length. We must ensure the warehouse appears at the begining
   and the end of the route 
  * */
-	public double calculateDistance(VRPdata data){
+	public double calculateDistance(ITPdata data){
 	
 		distanceTravelled = 0.0;
 		demand = data.shopList.get(0).currentDeliverySize;
