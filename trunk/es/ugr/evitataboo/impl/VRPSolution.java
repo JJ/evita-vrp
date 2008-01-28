@@ -39,6 +39,7 @@ public class VRPSolution implements Solution {
 
 
 
+
            
             @Override
     public Object clone(){   
@@ -57,22 +58,26 @@ public class VRPSolution implements Solution {
         return copy;
     }   // end clone
 
-    public void setAsInitialSolution(ITPdata data) {
+    /**
+     * Creates an initial solution 
+     * @param data
+     */
+    public void setAsInitialSolution(List<Shop> theShops, ITPdata data) {
         Shop theStore = data.shopList.get(0);
         boolean solutionInvalid = true;
-        for(int i = 1; i<data.shopList.size();i++){
-        Shop shop = data.shopList.get(i);
-        Route r = new Route();
-        r.shopsVisited.add(theStore);
-        r.shopsVisited.add(shop);
-        r.shopsVisited.add(theStore);
-        this.routes.add(r);
+        for (int i = 1; i < data.shopList.size(); i++) {
+            Shop shop = data.shopList.get(i);
+            Route r = new Route();
+            r.shopsVisited.add(theStore);
+            r.shopsVisited.add(shop);
+            r.shopsVisited.add(theStore);
+            this.routes.add(r);
         }
-System.out.println(this);
-        List<Shop> theShops = new ArrayList<Shop>();
+        System.out.println(this);
+       /* List<Shop> theShops = new ArrayList<Shop>();
         for (int i = 1; i < data.shopList.size(); i++) {
             theShops.add(data.shopList.get(i));
-        }
+        }*/
 
 
         ArrayList<Route> newRoutes = new ArrayList<Route>();
@@ -81,12 +86,12 @@ System.out.println(this);
         int iterations = 0;
         do {
             newRoutes.clear();
-            
+
             for (int i = 0; i < theShops.size(); i++) {
                 Route r = new Route();
                 newRoutes.add(r);
             }
-            
+
             solutionInvalid = false;
 
             Collections.shuffle(theShops);
@@ -101,7 +106,7 @@ System.out.println(this);
             for (Route r : newRoutes) {
                 r.shopsVisited.add(0, theStore);
                 r.shopsVisited.add(theStore);
-                        
+
                 if (r.shopsVisited.size() != 2) {
 
                     double distance = r.calculateDistance(data);
@@ -119,11 +124,11 @@ System.out.println(this);
                 solutionInvalid = true;
             }
 
-            
+
             this.routes = newRoutes;
             System.out.println(this);
         } while (solutionInvalid);
-        
+
 
     }
 
