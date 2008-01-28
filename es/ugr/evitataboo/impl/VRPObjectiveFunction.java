@@ -42,8 +42,9 @@ public class VRPObjectiveFunction implements ObjectiveFunction{
                     double distance = r.calculateDistance(itpdata);
                     
                     cost += r.calculateCost(itpdata);
-                    time += r.calculateTime(itpdata);
-                    if(r.demand > itpdata.vehicleCapacity)
+                    time = r.calculateTime(itpdata);
+                    if(r.demand > itpdata.vehicleCapacity 
+                            || time>itpdata.maximumWorkTime)
                         return Double.MAX_VALUE;
                     
 
@@ -51,9 +52,7 @@ public class VRPObjectiveFunction implements ObjectiveFunction{
 
             }
 
-            if(time>itpdata.maximumWorkTime){
-                return Double.MAX_VALUE;
-            }
+           
             
             return  cost ;
 

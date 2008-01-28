@@ -49,7 +49,7 @@ public class TabuSearch {
 
         
         while (hasNotFinished()) {
-            System.out.println("ITERACION "+iterations);
+            //System.out.println("ITERACION "+iterations);
             //System.out.println("Actual\t"+actualSolution);
             bestNeighbour = getBestNeighbour(actualSolution);
             bestNeighbourCost = objFunc.evaluate(bestNeighbour, null);
@@ -62,7 +62,7 @@ public class TabuSearch {
             if(actualSolutionCost < bestSolutionCost){
                 bestSolution = (Solution) actualSolution.clone();
                 bestSolutionCost =  actualSolutionCost;
-                System.out.println("NUEVA MEJOR SOLUCION: "+bestSolutionCost);
+                //System.out.println("NUEVA MEJOR SOLUCION: "+bestSolutionCost);
             }else{
                 //System.out.println("NO MEJOR SOLUCION");
             }
@@ -89,9 +89,6 @@ public class TabuSearch {
         double neighbourCost = Double.MAX_VALUE;
         double theBestNeighbourCost = Double.MAX_VALUE;
         boolean moved = false;
-        
-        //Creo que habría que poner que el merjo vecino sea el número uno, para 
-        //que no se repitan
         
         for (int i = 0; i < moves.length; i++) {
             Move move = moves[i];
