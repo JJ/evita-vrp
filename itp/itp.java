@@ -63,17 +63,20 @@ public class itp extends Problem implements SimpleProblemForm {
 		double cost = 0.0;
 		// Beware of shop 0; it's the warehouse in the shopList but not in the genome
 		// nShops is including it
-		for (int i = 0; i < input.nShops -1; i++){
-			int curFreq = input.calculateFrequencyForPattern(ind.genome[i]);			
-			input.shopList.get(i+1).calculateCurrentValues(curFreq);
-			double curInvCost =  input.shopList.get(i+1).currentInventoryCost;
+		for (int i = 0; i < input.nShops - 1; i++)
+		{
+			int curFreq = input.calculateFrequencyForPattern(ind.genome[i]);
+			input.shopList.get(i + 1).calculateCurrentValues(curFreq);
+			double curInvCost = input.shopList.get(i + 1).currentInventoryCost;
 			//System.out.print(i +"(" + ind.genome[i]+ ";" + curFreq + ";" + curInvCost + ") ");
-			cost +=curInvCost;
+			cost += curInvCost;
 		}
 		//System.out.println();
 		//Assign the inventoryCost fitness directly here
-		CostFitness c = ((CostFitness)ind.fitness);
-    	c.inventoryCost = cost;
+		//	CostFitness c = ((CostFitness)ind.fitness);
+		//	c.inventoryCost = cost;
+		((CostFitness)ind.fitness).inventoryCost = cost;
+		//System.out.println("Cost: "+cost + " " +((CostFitness)ind.fitness).inventoryCost );
 		return cost;
 	}
 	public double calculateTransportCost(EvolutionState state,
@@ -111,9 +114,11 @@ public class itp extends Problem implements SimpleProblemForm {
 			cost += solver.bestSolution.cost;	
 		}
 		//Assign these attributes of the fitness directly here
-		CostFitness c = ((CostFitness)ind.fitness);
-    	c.transportCost = cost;
-		c.bestRoutes = bestRoutes;
+		//CostFitness c = ((CostFitness)ind.fitness);
+		//c.transportCost = cost;
+		//c.bestRoutes = bestRoutes;
+		((CostFitness)ind.fitness).transportCost = cost;
+		((CostFitness)ind.fitness).bestRoutes = bestRoutes;
 		return cost;
 	}
 /*	public double calculateCost(EvolutionState state,PatternVectorIndividual ind,int threadnum){
@@ -142,9 +147,10 @@ public class itp extends Problem implements SimpleProblemForm {
         if (cost < minCost) {
  //       	System.out.println(cost +" is better than " + minCost);
         	minCost = cost;
-        }  	
-    	CostFitness c = (CostFitness)ind.fitness;
-    	c.totalCost = cost;
+        }
+		//CostFitness c = (CostFitness)ind.fitness;
+		//c.totalCost = cost;
+		((CostFitness)ind.fitness).totalCost = cost;
    	
     	ind2.evaluated = true;       
 	}
