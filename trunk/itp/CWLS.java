@@ -413,9 +413,11 @@ public class CWLS extends VRPSolver {
     		 int siguiente = tiendaLista.get(i).intValue();
     		 if (siguiente == 0){
     			R.shopsVisited.add(Depot);
-    			R.cost += coste_trayecto(siguiente,0);
+    			R.cost += coste_trayecto(actual,siguiente);
     			
-    			R.time += distanceTable[actual][siguiente]/speed;
+    			R.time +=  tiempo_trayecto(actual,siguiente);
+    			R.distanceTravelled += distanceTable[actual][siguiente];
+    			
     			bestSolution.addRoute(R);
     			
     			//new route
@@ -520,8 +522,14 @@ public class CWLS extends VRPSolver {
      * @return Cost
      */
     private double tiempo_trayecto(int actual,int siguiente){
+    	
+    	
+    	double t = distanceTable[actual][siguiente]/speed;
+    	
+    	if (siguiente !=0)
+    		t += downloadTime;
 
-     return downloadTime + distanceTable[actual][siguiente]/speed;
+     return t;
     }
 
     

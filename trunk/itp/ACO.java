@@ -68,6 +68,8 @@ public class ACO extends VRPSolver {
     
     private ArrayList <Integer> tiendaLista;
     private ArrayList <Integer> posicionLista;
+    
+    private int contador_iguales;
 
 	
 	
@@ -83,12 +85,52 @@ public class ACO extends VRPSolver {
 		feromonas= new double[input.nShops][input.nShops];
 		
 		tamferom = input.nShops;
+		
+		
+		
+		if (modulo(input.nShops,2)==0){
+			for (int i =0;i<input.nShops;i+=2){
+				for (int j =0;j<input.nShops;j+=2){
+					feromonas[i][j] = tau;
+					feromonas[i][j+1] = tau;					
+				}
 
-	    for (int i =0;i<input.nShops;i++)
-	        for (int j =0;j<input.nShops;j++)
-	            feromonas[i][j] = tau;
+				for (int j=0;j<input.nShops;j+=2){
+					feromonas[i+1][j] = tau;
+					feromonas[i+1][j+1] = tau;
+				}
+			}
+		}
+		else{
+			for (int i =0;i<input.nShops-1;i+=2){
+				for (int j =0;j<input.nShops-1;j+=2){
+					feromonas[i][j] = tau;
+					feromonas[i][j+1] = tau;					
+				}
 
-	    parametros = new double[6];
+				for (int j=0;j<input.nShops-1;j+=2){
+					feromonas[i+1][j] = tau;
+					feromonas[i+1][j+1] = tau;
+				}
+			}
+			
+			for (int j =0;j<input.nShops-1;j+=2){
+				feromonas[input.nShops-1][j] = tau;
+				feromonas[input.nShops-1][j+1] = tau;					
+			}
+
+			for (int j=0;j<input.nShops-1;j+=2){
+				feromonas[input.nShops-1][j] = tau;
+				feromonas[input.nShops-1][j+1] = tau;
+			}
+			
+			feromonas[input.nShops-1][input.nShops-1] = tau;				
+				
+		}
+			
+			
+
+	    parametros =  new double[6];
         parametros[0] = 0.2;//alpha
         parametros[1] = 0.8;//beta
         parametros[2] = 0.8;//epsilon
@@ -99,8 +141,10 @@ public class ACO extends VRPSolver {
 		factor = 6;
 		 
 		mejores_soluciones = new ArrayList[10];
-		for (int i =0;i<10;i++)
+		for (int i =0;i<10;i+=2){
             mejores_soluciones[i] = (ArrayList <Integer>) new ArrayList<Integer>();
+            mejores_soluciones[i+1] = (ArrayList <Integer>) new ArrayList<Integer>();
+		}
 
 		mejores_costes = new double [10];
         sinic = 0;
@@ -120,7 +164,7 @@ public class ACO extends VRPSolver {
         	
         }
 
-		
+		contador_iguales = 0;
 		
 		
 	}
@@ -142,16 +186,14 @@ public class ACO extends VRPSolver {
         ArrayList [] tiendaYaVisitadas = new ArrayList [nhormigas];
 
 
-        for (int i=0;i<nhormigas;i++){
-            posicionRestantes[i]=(ArrayList <Integer>) posicionLista.clone();
-            tiendaRestantes[i]=(ArrayList <Integer>) tiendaLista.clone();
-        }
         
         //First iteration
         //------------------
         
         //1. Each ant inserts warehouse		
         for (int h=0;h<nhormigas;h++){
+        	posicionRestantes[h]=(ArrayList <Integer>) posicionLista.clone();
+            tiendaRestantes[h]=(ArrayList <Integer>) tiendaLista.clone();
         	posicionYaVisitadas[h]=(ArrayList <Integer>) new ArrayList<Integer>();
         	posicionYaVisitadas[h].add(new Integer(-1));
         	
@@ -271,11 +313,14 @@ public class ACO extends VRPSolver {
         //8. Updates indexes sfin and sinic
         cambiar_configuracion();
         
+        
+        
       
         
         //Rest of iterations
         //--------------------
-        for (int iter = 1;iter <iteraciones;iter++){
+        int iter = 1;
+        while(contador_iguales <40 && iter<iteraciones){
            
             //1. Each ant inserts warehouse	
             for (int h=0;h<nhormigas;h++){
@@ -400,12 +445,22 @@ public class ACO extends VRPSolver {
             if (mejores_costes[sfin]<mejor_coste_ejecucion){
                 mejor_solucion_ejecucion = (ArrayList <Integer>) mejores_soluciones[sfin].clone();
                 mejor_coste_ejecucion = mejores_costes[sfin];
+                
+                //We restart the counter of same solution
+                contador_iguales = 0;
             }
+            else
+            	contador_iguales ++;
 
 
             //8. Updates indexes sfin and sinic
             cambiar_configuracion();
+            
+            //New iteration
+            iter++;
         }
+        
+        
         
 
         //Copies the global solution to routes4Today
@@ -427,11 +482,11 @@ public class ACO extends VRPSolver {
         actual = (s.get(0)).intValue();
 
         for (int i=1;i<s.size();i++){
-                siguiente = (s.get(i)).intValue();
+            siguiente = (s.get(i)).intValue();
 
-                c += coste_trayecto(actual,siguiente);
+            c += coste_trayecto(actual,siguiente);
 
-                actual = siguiente;
+            actual = siguiente;
         }
 
 
@@ -462,8 +517,11 @@ public class ACO extends VRPSolver {
     public double tiempo_trayecto(int actual,int siguiente){        
         double t = 0.0;
         
-        if (actual != siguiente)
-            t = downloadTime + distanceTable[actual][siguiente]/speed;
+        if (actual != siguiente){
+        	t = distanceTable[actual][siguiente]/speed;
+        	if (siguiente != 0)
+        		t += downloadTime;
+        }
 
      return t;
     }
@@ -486,15 +544,22 @@ public class ACO extends VRPSolver {
      */
     public void actualiza_feromona(){
 
-        for (int i =0;i<tamferom;i++)
-                for (int j=0;j<tamferom;j++){
-                        feromonas[i][j] *= 1 - parametros[3];
-                        feromonas[i][j] += parametros[3]*coste_trayecto(i,j);
-                }
+    	
+    	for (int i =0;i<tamferom;i++)
+            for (int j=0;j<tamferom;j++){
+                    feromonas[i][j] *= 1 - parametros[3];
+                    feromonas[i][j] += parametros[3]*coste_trayecto(i,j);
+            }
+    	
+    	
+    	
 
+    	
+    	
+    	
     }
     
-    /*Calculates next shop to visit
+    /**Calculates next shop to visit
      * 
      * @param actual: current shop
      * @param lista_tiendas: shops have not been able to visit yet
@@ -524,7 +589,7 @@ public class ACO extends VRPSolver {
                 int tienda = tiendaR.get(i).intValue();
                 int ptienda = posicionR.get(i).intValue();
                 
-                double t1 = distanceTable[tienda][0]/speed;
+                double t1 = tiempo_trayecto(actual,0);
                 double t2 = tiempo_trayecto(actual,tienda);
                 
                 double c1 = shops4Today.get(ptienda).currentDeliverySize;
@@ -964,6 +1029,7 @@ public class ACO extends VRPSolver {
    			 R.cost += coste_trayecto(actual,siguiente);
    			 
    			 R.time += distanceTable[actual][siguiente]/speed;
+   			 R.distanceTravelled += distanceTable[actual][siguiente];
    			 bestSolution.addRoute(R);
    			 //New route
    			 R = new Route();
