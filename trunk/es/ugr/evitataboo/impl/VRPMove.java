@@ -58,6 +58,9 @@ public class VRPMove implements Move{
             routes.get(newRoute).shopsVisited.add(newPos, theShop);
         
             initialRoute.shopsVisited.remove(theShop);
+            
+            if(initialRoute.shopsVisited.size()==2)
+                routes.remove(initialRoute);
         }else{ //The routes are the same
             if(newPos< shopPosition){
                 routes.get(newRoute).shopsVisited.add(newPos,theShop);
@@ -67,6 +70,17 @@ public class VRPMove implements Move{
                 routes.get(newRoute).shopsVisited.remove(shopPosition);
             }
         }
+        
+        if(routes.get(0).shopsVisited.size()!=2){
+            Shop theStore = routes.get(0).shopsVisited.get(0);
+            
+            Route r = new Route();
+            r.shopsVisited.add(theStore);
+            r.shopsVisited.add(theStore);
+            
+            routes.add(0,r);
+        }
+            
         
         //Habrá que tocar esto? (Creo que no)
         /*if(initialRoute.shopsVisited.size() == 2)
