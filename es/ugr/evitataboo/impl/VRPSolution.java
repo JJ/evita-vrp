@@ -22,6 +22,7 @@ public class VRPSolution implements Solution {
 
     ArrayList<Route> routes;
     private int MAX_ITERATIONS = 100000; //To create an initial random solution
+    private double cost = -1;
 
     public VRPSolution() {
         this.routes = new ArrayList<Route>();
@@ -37,7 +38,8 @@ public class VRPSolution implements Solution {
     public Object clone() {
         VRPSolution copy = new VRPSolution();
         //copy.routes = (ArrayList<Route>)this.routes.clone();
-        copy.routes = new ArrayList<Route>();
+        
+       /* copy.routes = new ArrayList<Route>();
         for (int i = 0; i < this.routes.size(); i++) {
             Route r = new Route(this.routes.get(i));
             r.shopsVisited.clear();
@@ -45,8 +47,14 @@ public class VRPSolution implements Solution {
                 r.shopsVisited.add(this.routes.get(i).shopsVisited.get(j));
             }
             copy.routes.add(r);
-        }
-
+        }*/
+        copy.routes = new ArrayList<Route>();
+        for (int i = 0; i < this.routes.size(); i++) {
+            Route r = new Route(this.routes.get(i));
+            r.shopsVisited.clear();
+            r.shopsVisited = (ArrayList<Shop>)this.routes.get(i).shopsVisited.clone();
+            copy.routes.add(r);
+        }    
         return copy;
     }   // end clone
 
@@ -78,9 +86,10 @@ public class VRPSolution implements Solution {
 
         int iterations = 0;
         do {
+            this.routes.clear();
             newRoutes.clear();
 
-            for (int i = 0; i < theShops.size(); i++) {
+           for (int i = 0; i < theShops.size(); i++) {
                 Route r = new Route();
                 newRoutes.add(r);
             }
@@ -111,11 +120,17 @@ public class VRPSolution implements Solution {
                     if (r.demand > data.vehicleCapacity || outatime > data.maximumWorkTime) {
                         solutionInvalid = true;
                     }
+                    this.routes.add(r);
                 }
             }
+            
+            Route emptyRoute = new Route();
+            emptyRoute.shopsVisited.add(theStore);
+            emptyRoute.shopsVisited.add(theStore);
+            this.routes.add(0, emptyRoute);
 
-
-            this.routes = newRoutes;
+            //this.routes = newRoutes;
+            
             iterations++;
             
             if (iterations > MAX_ITERATIONS) {
@@ -125,6 +140,7 @@ public class VRPSolution implements Solution {
             
         } while (solutionInvalid);
 
+        //System.out.println("INITIAL: "+this.toString());
 
     }
 
@@ -146,4 +162,16 @@ public class VRPSolution implements Solution {
     public ArrayList<Route> getRoutes() {
         return routes;
     }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+    
+    
+    
+    
 }
