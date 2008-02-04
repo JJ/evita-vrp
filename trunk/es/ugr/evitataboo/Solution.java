@@ -11,6 +11,10 @@ package es.ugr.evitataboo;
  */
 public interface Solution {
     public Object clone();
+    
+    public double getCost();
+
+    public void setCost(double cost);
 
 
 }
