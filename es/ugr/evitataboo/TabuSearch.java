@@ -43,6 +43,7 @@ public class TabuSearch {
         iterations = 0;
         bestSolution = initialSolution;
         actualSolution = initialSolution;
+        actualSolution.setCost(objFunc.evaluate(bestSolution, null));
         double actualSolutionCost = Double.MAX_VALUE;
         double bestNeighbourCost = Double.MAX_VALUE;
         double bestSolutionCost = Double.MAX_VALUE;
@@ -52,7 +53,10 @@ public class TabuSearch {
             //System.out.println("ITERACION "+iterations);
             //System.out.println("Actual\t"+actualSolution);
             bestNeighbour = getBestNeighbour(actualSolution);
-            bestNeighbourCost = objFunc.evaluate(bestNeighbour, null);
+            
+            bestNeighbourCost = bestNeighbour.getCost();
+            
+            
             
             if(bestNeighbourCost<actualSolutionCost){
                 actualSolution = (Solution)bestNeighbour.clone();
@@ -94,10 +98,14 @@ public class TabuSearch {
             Move move = moves[i];
             
             Solution neighbour = (Solution) actual.clone();
-            //System.out.println("Antes"+neighbour);
+            //System.out.println("Antes  "+neighbour);
             move.operateOn(neighbour);
             //System.out.println("Despues"+neighbour);
-            neighbourCost = objFunc.evaluate(neighbour, null);
+            //neighbourCost = objFunc.evaluate(neighbour, null);
+            //System.out.println("La buena"+neighbourCost);
+            neighbourCost = neighbour.getCost();
+            //System.out.println("La mala "+neighbourCost);
+            
             
             //System.out.println(move);
             if (neighbourCost<theBestNeighbourCost && !this.tabuList.isTabu(move)) {
