@@ -1,0 +1,627 @@
+
+Generation: 0
+Best Individual:
+Evaluated: T
+Total cost: 11145.799244543763	Inventory cost: 9159.0	Transport cost: 1986.7992445437624
+ 13 9 17 17 23 23 11 11 21 31 5 5 17 13 21 11 23 29 29 31 13 29 11 18 31 10 11 10 29 13 10
+
+Generation: 1
+Best Individual:
+Evaluated: T
+Total cost: 11088.469642907621	Inventory cost: 9114.0	Transport cost: 1974.4696429076207
+ 29 18 18 21 29 29 5 18 18 29 5 29 23 23 23 13 23 23 23 31 5 29 17 31 31 29 23 5 31 17 21
+
+Generation: 2
+Best Individual:
+Evaluated: T
+Total cost: 11088.469642907621	Inventory cost: 9114.0	Transport cost: 1974.4696429076207
+ 29 18 18 21 29 29 5 18 18 29 5 29 23 23 23 13 23 23 23 31 5 29 17 31 31 29 23 5 31 17 21
+
+Generation: 3
+Best Individual:
+Evaluated: T
+Total cost: 11080.929795935874	Inventory cost: 9091.0	Transport cost: 1989.929795935873
+ 29 18 18 21 29 29 5 18 18 29 5 29 23 23 23 13 23 23 23 29 23 31 13 10 29 21 11 21 31 11 21
+
+Generation: 4
+Best Individual:
+Evaluated: T
+Total cost: 11063.557584772923	Inventory cost: 9050.0	Transport cost: 2013.5575847729233
+ 31 9 31 11 29 29 17 21 11 23 10 23 23 31 21 17 31 23 31 31 11 23 17 31 31 23 13 17 29 10 23
+
+Generation: 5
+Best Individual:
+Evaluated: T
+Total cost: 11039.506418617735	Inventory cost: 9029.0	Transport cost: 2010.5064186177353
+ 29 18 18 21 29 29 13 13 23 29 5 29 23 23 23 13 23 23 23 29 23 31 13 10 29 21 11 21 31 11 21
+
+Generation: 6
+Best Individual:
+Evaluated: T
+Total cost: 10980.382809237664	Inventory cost: 9042.0	Transport cost: 1938.3828092376652
+ 29 18 18 21 29 29 11 21 9 29 21 21 29 21 23 13 23 23 23 31 17 29 21 31 31 13 11 21 31 11 21
+
+Generation: 7
+Best Individual:
+Evaluated: T
+Total cost: 10980.382809237664	Inventory cost: 9042.0	Transport cost: 1938.3828092376652
+ 29 18 18 21 29 29 11 21 9 29 21 21 29 21 23 13 23 23 23 31 17 29 21 31 31 13 11 21 31 11 21
+
+Generation: 8
+Best Individual:
+Evaluated: T
+Total cost: 10980.382809237664	Inventory cost: 9042.0	Transport cost: 1938.3828092376652
+ 29 18 18 21 29 29 11 21 9 29 21 21 29 21 23 13 23 23 23 31 17 29 21 31 31 13 11 21 31 11 21
+
+Generation: 9
+Best Individual:
+Evaluated: T
+Total cost: 10980.382809237664	Inventory cost: 9042.0	Transport cost: 1938.3828092376652
+ 29 18 18 21 29 29 11 21 9 29 21 21 29 21 23 13 23 23 23 31 17 29 21 31 31 13 11 21 31 11 21
+
+Generation: 10
+Best Individual:
+Evaluated: T
+Total cost: 10980.382809237664	Inventory cost: 9042.0	Transport cost: 1938.3828092376652
+ 29 18 18 21 29 29 11 21 9 29 21 21 29 21 23 13 23 23 23 31 17 29 21 31 31 13 11 21 31 11 21
+
+Generation: 11
+Best Individual:
+Evaluated: T
+Total cost: 10975.647711527234	Inventory cost: 9039.0	Transport cost: 1936.647711527233
+ 29 9 29 5 29 29 11 21 9 29 21 29 29 13 23 13 23 23 23 29 23 23 13 31 29 29 23 5 31 17 21
+
+Generation: 12
+Best Individual:
+Evaluated: T
+Total cost: 10964.936121375336	Inventory cost: 9001.0	Transport cost: 1963.9361213753364
+ 29 18 18 21 29 29 11 21 21 29 21 21 29 21 23 21 23 23 23 31 17 31 21 31 31 29 23 21 31 11 21
+
+Generation: 13
+Best Individual:
+Evaluated: T
+Total cost: 10941.07581361466	Inventory cost: 8982.0	Transport cost: 1959.0758136146596
+ 29 18 18 21 29 29 11 21 21 29 21 21 29 13 23 21 23 23 23 31 21 31 21 31 31 29 23 21 31 11 21
+
+Generation: 14
+Best Individual:
+Evaluated: T
+Total cost: 10917.852336363165	Inventory cost: 8997.0	Transport cost: 1920.8523363631655
+ 29 18 18 21 29 29 11 21 21 29 5 21 29 13 23 21 23 23 23 31 21 31 21 31 31 29 23 21 31 11 21
+
+Generation: 15
+Best Individual:
+Evaluated: T
+Total cost: 10917.852336363165	Inventory cost: 8997.0	Transport cost: 1920.8523363631655
+ 29 18 18 21 29 29 11 21 21 29 5 21 29 13 23 21 23 23 23 31 21 31 21 31 31 29 23 21 31 11 21
+
+Generation: 16
+Best Individual:
+Evaluated: T
+Total cost: 10917.852336363165	Inventory cost: 8997.0	Transport cost: 1920.8523363631655
+ 29 18 18 21 29 29 11 21 21 29 5 21 29 13 23 21 23 23 23 31 21 31 21 31 31 29 23 21 31 11 21
+
+Generation: 17
+Best Individual:
+Evaluated: T
+Total cost: 10894.46060245889	Inventory cost: 8986.0	Transport cost: 1908.4606024588893
+ 29 18 18 21 29 23 31 21 21 29 21 21 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 18
+Best Individual:
+Evaluated: T
+Total cost: 10894.46060245889	Inventory cost: 8986.0	Transport cost: 1908.4606024588893
+ 29 18 18 21 29 23 31 21 21 29 21 21 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 19
+Best Individual:
+Evaluated: T
+Total cost: 10894.46060245889	Inventory cost: 8986.0	Transport cost: 1908.4606024588893
+ 29 18 18 21 29 23 31 21 21 29 21 21 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 20
+Best Individual:
+Evaluated: T
+Total cost: 10887.817304872162	Inventory cost: 8980.0	Transport cost: 1907.8173048721624
+ 29 18 18 21 29 29 31 21 21 29 21 29 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 21
+Best Individual:
+Evaluated: T
+Total cost: 10887.817304872162	Inventory cost: 8980.0	Transport cost: 1907.8173048721624
+ 29 18 18 21 29 29 31 21 21 29 21 29 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 22
+Best Individual:
+Evaluated: T
+Total cost: 10887.817304872162	Inventory cost: 8980.0	Transport cost: 1907.8173048721624
+ 29 18 18 21 29 29 31 21 21 29 21 29 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 23
+Best Individual:
+Evaluated: T
+Total cost: 10887.817304872162	Inventory cost: 8980.0	Transport cost: 1907.8173048721624
+ 29 18 18 21 29 29 31 21 21 29 21 29 29 13 23 11 23 23 23 29 23 23 21 31 31 29 23 21 31 11 21
+
+Generation: 24
+Best Individual:
+Evaluated: T
+Total cost: 10871.258458488466	Inventory cost: 8986.0	Transport cost: 1885.258458488466
+ 29 18 18 21 29 29 31 21 21 29 21 21 29 13 23 11 23 23 23 31 23 23 21 31 29 29 23 21 31 11 21
+
+Generation: 25
+Best Individual:
+Evaluated: T
+Total cost: 10871.258458488466	Inventory cost: 8986.0	Transport cost: 1885.258458488466
+ 29 18 18 21 29 29 31 21 21 29 21 21 29 13 23 11 23 23 23 31 23 23 21 31 29 29 23 21 31 11 21
+
+Generation: 26
+Best Individual:
+Evaluated: T
+Total cost: 10849.24941603624	Inventory cost: 8997.0	Transport cost: 1852.2494160362405
+ 29 18 18 21 29 23 31 21 21 29 21 21 29 13 23 11 23 23 23 29 23 23 21 31 29 29 11 21 31 23 21
+
+Generation: 27
+Best Individual:
+Evaluated: T
+Total cost: 10849.24941603624	Inventory cost: 8997.0	Transport cost: 1852.2494160362405
+ 29 18 18 21 29 23 31 21 21 29 21 21 29 13 23 11 23 23 23 29 23 23 21 31 29 29 11 21 31 23 21
+
+Generation: 28
+Best Individual:
+Evaluated: T
+Total cost: 10849.24941603624	Inventory cost: 8997.0	Transport cost: 1852.2494160362405
+ 29 18 18 21 29 23 31 21 21 29 21 21 29 13 23 11 23 23 23 29 23 23 21 31 29 29 11 21 31 23 21
+
+Generation: 29
+Best Individual:
+Evaluated: T
+Total cost: 10842.965703539443	Inventory cost: 9013.0	Transport cost: 1829.9657035394434
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 21 23 29 23 23 23 29 21 23 21 11 29 29 23 21 31 29 21
+
+Generation: 30
+Best Individual:
+Evaluated: T
+Total cost: 10842.965703539443	Inventory cost: 9013.0	Transport cost: 1829.9657035394434
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 21 23 29 23 23 23 29 21 23 21 11 29 29 23 21 31 29 21
+
+Generation: 31
+Best Individual:
+Evaluated: T
+Total cost: 10842.965703539443	Inventory cost: 9013.0	Transport cost: 1829.9657035394434
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 21 23 29 23 23 23 29 21 23 21 11 29 29 23 21 31 29 21
+
+Generation: 32
+Best Individual:
+Evaluated: T
+Total cost: 10838.424220249224	Inventory cost: 9005.0	Transport cost: 1833.4242202492233
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 21 23 23 23 23 23 23 21 31 29 29 29 21 31 29 21
+
+Generation: 33
+Best Individual:
+Evaluated: T
+Total cost: 10838.424220249224	Inventory cost: 9005.0	Transport cost: 1833.4242202492233
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 21 23 23 23 23 23 23 21 31 29 29 29 21 31 29 21
+
+Generation: 34
+Best Individual:
+Evaluated: T
+Total cost: 10838.424220249224	Inventory cost: 9005.0	Transport cost: 1833.4242202492233
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 21 23 23 23 23 23 23 21 31 29 29 29 21 31 29 21
+
+Generation: 35
+Best Individual:
+Evaluated: T
+Total cost: 10838.424220249224	Inventory cost: 9005.0	Transport cost: 1833.4242202492233
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 21 23 23 23 23 23 23 21 31 29 29 29 21 31 29 21
+
+Generation: 36
+Best Individual:
+Evaluated: T
+Total cost: 10833.057033811578	Inventory cost: 9011.0	Transport cost: 1822.0570338115776
+ 29 18 18 21 29 29 31 21 23 29 5 21 29 21 23 11 23 23 23 29 23 23 21 11 29 29 31 21 31 11 21
+
+Generation: 37
+Best Individual:
+Evaluated: T
+Total cost: 10833.057033811578	Inventory cost: 9011.0	Transport cost: 1822.0570338115776
+ 29 18 18 21 29 29 31 21 23 29 5 21 29 21 23 11 23 23 23 29 23 23 21 11 29 29 31 21 31 11 21
+
+Generation: 38
+Best Individual:
+Evaluated: T
+Total cost: 10821.072899303628	Inventory cost: 9019.0	Transport cost: 1802.0728993036275
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 13 23 23 23 29 21 23 21 31 29 23 11 21 31 29 21
+
+Generation: 39
+Best Individual:
+Evaluated: T
+Total cost: 10821.072899303628	Inventory cost: 9019.0	Transport cost: 1802.0728993036275
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 13 23 23 23 29 21 23 21 31 29 23 11 21 31 29 21
+
+Generation: 40
+Best Individual:
+Evaluated: T
+Total cost: 10821.072899303628	Inventory cost: 9019.0	Transport cost: 1802.0728993036275
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 13 23 23 23 29 21 23 21 31 29 23 11 21 31 29 21
+
+Generation: 41
+Best Individual:
+Evaluated: T
+Total cost: 10821.072899303628	Inventory cost: 9019.0	Transport cost: 1802.0728993036275
+ 29 18 18 21 29 29 31 21 21 29 5 21 29 13 23 13 23 23 23 29 21 23 21 31 29 23 11 21 31 29 21
+
+Generation: 42
+Best Individual:
+Evaluated: T
+Total cost: 10811.932037007053	Inventory cost: 9000.0	Transport cost: 1811.9320370070518
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 23 13 23 23 23 31 21 23 21 31 29 29 31 21 31 29 21
+
+Generation: 43
+Best Individual:
+Evaluated: T
+Total cost: 10806.330080119194	Inventory cost: 9008.0	Transport cost: 1798.3300801191947
+ 29 18 18 21 29 23 31 23 21 29 5 21 13 13 31 13 23 23 23 29 21 23 21 31 29 23 31 21 31 29 21
+
+Generation: 44
+Best Individual:
+Evaluated: T
+Total cost: 10806.330080119194	Inventory cost: 9008.0	Transport cost: 1798.3300801191947
+ 29 18 18 21 29 23 31 23 21 29 5 21 13 13 31 13 23 23 23 29 21 23 21 31 29 23 31 21 31 29 21
+
+Generation: 45
+Best Individual:
+Evaluated: T
+Total cost: 10801.234562274625	Inventory cost: 9008.0	Transport cost: 1793.2345622746257
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 29 21 23 21 31 29 23 31 21 31 29 21
+
+Generation: 46
+Best Individual:
+Evaluated: T
+Total cost: 10792.308781703508	Inventory cost: 8991.0	Transport cost: 1801.3087817035082
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 31 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 47
+Best Individual:
+Evaluated: T
+Total cost: 10792.308781703508	Inventory cost: 8991.0	Transport cost: 1801.3087817035082
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 31 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 48
+Best Individual:
+Evaluated: T
+Total cost: 10792.308781703508	Inventory cost: 8991.0	Transport cost: 1801.3087817035082
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 31 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 49
+Best Individual:
+Evaluated: T
+Total cost: 10792.308781703508	Inventory cost: 8991.0	Transport cost: 1801.3087817035082
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 31 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 50
+Best Individual:
+Evaluated: T
+Total cost: 10792.308781703508	Inventory cost: 8991.0	Transport cost: 1801.3087817035082
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 31 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 51
+Best Individual:
+Evaluated: T
+Total cost: 10792.308781703508	Inventory cost: 8991.0	Transport cost: 1801.3087817035082
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 31 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 52
+Best Individual:
+Evaluated: T
+Total cost: 10784.069901642291	Inventory cost: 9001.0	Transport cost: 1783.0699016422905
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 23 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 53
+Best Individual:
+Evaluated: T
+Total cost: 10783.64598314712	Inventory cost: 9008.0	Transport cost: 1775.6459831471202
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 23 21 23 21 31 29 29 31 21 31 29 21
+
+Generation: 54
+Best Individual:
+Evaluated: T
+Total cost: 10783.64598314712	Inventory cost: 9008.0	Transport cost: 1775.6459831471202
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 23 21 23 21 31 29 29 31 21 31 29 21
+
+Generation: 55
+Best Individual:
+Evaluated: T
+Total cost: 10783.64598314712	Inventory cost: 9008.0	Transport cost: 1775.6459831471202
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 23 21 23 21 31 29 29 31 21 31 29 21
+
+Generation: 56
+Best Individual:
+Evaluated: T
+Total cost: 10780.657469999196	Inventory cost: 8984.0	Transport cost: 1796.6574699991959
+ 29 18 18 21 29 23 31 23 21 29 5 21 29 13 31 13 23 23 23 29 23 31 21 31 29 29 31 21 31 29 21
+
+Generation: 57
+Best Individual:
+Evaluated: T
+Total cost: 10780.657469999196	Inventory cost: 8984.0	Transport cost: 1796.6574699991959
+ 29 18 18 21 29 23 31 23 21 29 5 21 29 13 31 13 23 23 23 29 23 31 21 31 29 29 31 21 31 29 21
+
+Generation: 58
+Best Individual:
+Evaluated: T
+Total cost: 10780.657469999196	Inventory cost: 8984.0	Transport cost: 1796.6574699991959
+ 29 18 18 21 29 23 31 23 21 29 5 21 29 13 31 13 23 23 23 29 23 31 21 31 29 29 31 21 31 29 21
+
+Generation: 59
+Best Individual:
+Evaluated: T
+Total cost: 10777.804078236168	Inventory cost: 8994.0	Transport cost: 1783.8040782361677
+ 29 18 18 21 29 23 31 23 21 29 5 21 29 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 60
+Best Individual:
+Evaluated: T
+Total cost: 10777.804078236168	Inventory cost: 8994.0	Transport cost: 1783.8040782361677
+ 29 18 18 21 29 23 31 23 21 29 5 21 29 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 61
+Best Individual:
+Evaluated: T
+Total cost: 10775.725579700733	Inventory cost: 9017.0	Transport cost: 1758.725579700733
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 23 21 23 21 13 29 29 31 21 31 29 21
+
+Generation: 62
+Best Individual:
+Evaluated: T
+Total cost: 10775.725579700733	Inventory cost: 9017.0	Transport cost: 1758.725579700733
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 13 31 13 23 23 23 23 21 23 21 13 29 29 31 21 31 29 21
+
+Generation: 63
+Best Individual:
+Evaluated: T
+Total cost: 10775.075840483058	Inventory cost: 9001.0	Transport cost: 1774.075840483058
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 64
+Best Individual:
+Evaluated: T
+Total cost: 10775.075840483058	Inventory cost: 9001.0	Transport cost: 1774.075840483058
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 65
+Best Individual:
+Evaluated: T
+Total cost: 10775.075840483058	Inventory cost: 9001.0	Transport cost: 1774.075840483058
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 66
+Best Individual:
+Evaluated: T
+Total cost: 10775.075840483058	Inventory cost: 9001.0	Transport cost: 1774.075840483058
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 67
+Best Individual:
+Evaluated: T
+Total cost: 10775.075840483058	Inventory cost: 9001.0	Transport cost: 1774.075840483058
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 68
+Best Individual:
+Evaluated: T
+Total cost: 10775.075840483058	Inventory cost: 9001.0	Transport cost: 1774.075840483058
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 69
+Best Individual:
+Evaluated: T
+Total cost: 10770.299520758726	Inventory cost: 9010.0	Transport cost: 1760.299520758727
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 13 29 29 31 21 31 29 21
+
+Generation: 70
+Best Individual:
+Evaluated: T
+Total cost: 10770.299520758726	Inventory cost: 9010.0	Transport cost: 1760.299520758727
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 13 29 29 31 21 31 29 21
+
+Generation: 71
+Best Individual:
+Evaluated: T
+Total cost: 10770.299520758726	Inventory cost: 9010.0	Transport cost: 1760.299520758727
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 13 29 29 31 21 31 29 21
+
+Generation: 72
+Best Individual:
+Evaluated: T
+Total cost: 10770.299520758726	Inventory cost: 9010.0	Transport cost: 1760.299520758727
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 13 29 29 31 21 31 29 21
+
+Generation: 73
+Best Individual:
+Evaluated: T
+Total cost: 10770.299520758726	Inventory cost: 9010.0	Transport cost: 1760.299520758727
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 13 29 29 31 21 31 29 21
+
+Generation: 74
+Best Individual:
+Evaluated: T
+Total cost: 10770.299520758726	Inventory cost: 9010.0	Transport cost: 1760.299520758727
+ 29 18 18 21 29 23 31 23 21 29 5 21 21 13 31 13 23 23 23 29 23 23 21 13 29 29 31 21 31 29 21
+
+Generation: 75
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 76
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 77
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 78
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 79
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 80
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 81
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 82
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 83
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 84
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 85
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 86
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 87
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 88
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 89
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 90
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 91
+Best Individual:
+Evaluated: T
+Total cost: 10762.58009250263	Inventory cost: 8992.0	Transport cost: 1770.58009250263
+ 29 18 18 21 29 23 31 21 21 29 5 21 29 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 92
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 93
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 94
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 95
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 96
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 97
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 98
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Generation: 99
+Best Individual:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Best Individual of Run:
+Evaluated: T
+Total cost: 10759.02988408023	Inventory cost: 8999.0	Transport cost: 1760.0298840802302
+ 29 18 18 21 29 23 31 21 21 29 5 21 21 31 31 13 23 23 23 29 23 23 21 31 29 29 31 21 31 29 21
+
+Best Individual of Run:
+Day 0 (4 routes)
+(0, 12, 1, 21, 31, 19, 17, 13, 7, 0) (0, 14, 23, 2, 3, 6, 26, 30, 0) (0, 28, 4, 8, 9, 22, 18, 24, 0) (0, 29, 15, 10, 25, 5, 20, 27, 0) 
+
+Day 1 (2 routes)
+(0, 1, 7, 16, 26, 30, 0) (0, 29, 15, 10, 25, 5, 20, 27, 24, 14, 0) 
+
+Day 2 (4 routes)
+(0, 12, 1, 21, 31, 19, 17, 13, 7, 0) (0, 18, 8, 11, 4, 28, 23, 6, 0) (0, 29, 22, 9, 15, 10, 25, 5, 20, 0) (0, 27, 24, 14, 26, 16, 30, 0) 
+
+Day 3 (2 routes)
+(0, 3, 2, 17, 19, 21, 7, 0) (0, 29, 15, 22, 18, 6, 14, 24, 27, 0) 
+
+Day 4 (4 routes)
+(0, 12, 1, 21, 31, 19, 17, 13, 7, 0) (0, 18, 8, 11, 4, 28, 23, 6, 0) (0, 29, 22, 9, 15, 10, 25, 5, 20, 0) (0, 27, 24, 14, 26, 16, 30, 0) 
+
+Total cost: 10759.02988408023 
+Inventory cost: 8999.0 
+Transport cost: 1760.0298840802302 
+
+Cost: 10755.386761320773
