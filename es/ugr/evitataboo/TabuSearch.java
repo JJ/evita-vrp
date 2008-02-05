@@ -91,20 +91,27 @@ public class TabuSearch {
         Move bestNeighbourMove = null;
         Solution theBestNeighbour = (Solution) actual.clone();
         double neighbourCost = Double.MAX_VALUE;
-        double theBestNeighbourCost = Double.MAX_VALUE;
+        double theBestNeighbourCost = objFunc.evaluate(theBestNeighbour, bestNeighbourMove);
         boolean moved = false;
         
+        Solution neighbour = (Solution) actual.clone();
         for (int i = 0; i < moves.length; i++) {
             Move move = moves[i];
             
-            Solution neighbour = (Solution) actual.clone();
+            
             //System.out.println("Antes  "+neighbour);
+            //System.out.println("Cost: "+neighbour.getCost());
+            
             move.operateOn(neighbour);
+            
             //System.out.println("Despues"+neighbour);
             //neighbourCost = objFunc.evaluate(neighbour, null);
             //System.out.println("La buena"+neighbourCost);
             neighbourCost = neighbour.getCost();
             //System.out.println("La mala "+neighbourCost);
+            //Solution temp = (Solution) neighbour.clone();
+            
+            //System.out.println("Despues"+temp+"\n");
             
             
             //System.out.println(move);
@@ -119,11 +126,11 @@ public class TabuSearch {
                 moved = true;
                 
             }
+            move.undo(neighbour);
             
-            /*if(neighbourCost==Double.MAX_VALUE){
-                tabuList.addMove(move);
-                System.out.println("Añadido tabu uno rancio");
-            }*/
+            //System.out.println("DESPUES"+neighbour);
+            //System.out.println("Other "+neighbour.getCost());
+            
             
             //System.out.println("El mejor vecino es: "+theBestNeighbour);
         }
@@ -131,8 +138,8 @@ public class TabuSearch {
                 tabuList.addMove(bestNeighbourMove);
                 //System.out.println("\tAñadiendo: "+bestNeighbourMove);
         }
-        //System.out.println("COSTE DEL MEJOR VECINO: "+theBestNeighbourCost+"\n\t"+theBestNeighbour);
-        //System.out.println("Comprobando:"+objFunc.evaluate(theBestNeighbour, null));
+        //System.out.println("COSTE DEL MEJOR VECINO: "+theBestNeighbourCost+"\t"+theBestNeighbour);
+        //System.out.println("Comprobando:            "+objFunc.evaluate(theBestNeighbour, null));
         return (Solution)theBestNeighbour.clone();
 
 
@@ -142,5 +149,3 @@ public class TabuSearch {
         return this.bestSolution;
     }
 }
-
-
