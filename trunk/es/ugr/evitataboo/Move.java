@@ -23,4 +23,6 @@ public interface Move {
     public Integer getHash();
     
     public Object clone();
+    
+    public void undo(Solution solution);
 }
