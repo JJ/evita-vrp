@@ -23,6 +23,7 @@ public class VRPSolution implements Solution {
     ArrayList<Route> routes;
     private int MAX_ITERATIONS = 100000; //To create an initial random solution
     private double cost = -1;
+    static ITPdata data;
 
     public VRPSolution() {
         this.routes = new ArrayList<Route>();
@@ -37,6 +38,7 @@ public class VRPSolution implements Solution {
     @Override
     public Object clone() {
         VRPSolution copy = new VRPSolution();
+        copy.setCost(this.getCost());
         //copy.routes = (ArrayList<Route>)this.routes.clone();
         
        /* copy.routes = new ArrayList<Route>();
@@ -62,7 +64,7 @@ public class VRPSolution implements Solution {
      * Creates an initial solution 
      * @param data
      */
-    public void setAsInitialSolution(Shop theDepot, List<Shop> theShops, ITPdata data) throws IncompatibleSolutionException {
+    public void setAsInitialSolution(Shop theDepot, List<Shop> theShops) throws IncompatibleSolutionException {
        // Shop theStore = data.shopList.get(0);
         Shop theStore = theDepot;
         boolean solutionInvalid = true;
@@ -169,6 +171,15 @@ public class VRPSolution implements Solution {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+    
+    public static void setITPdata(ITPdata itpdata){
+        data = itpdata;
+    
+    }
+    
+    public static ITPdata  getITPdata(){
+        return data;
     }
     
     
