@@ -43,9 +43,11 @@ public class TS extends VRPSolver {
 
 
         VRPSolution initial = new VRPSolution();
+         //
+        VRPSolution.setITPdata(data);
         //this.data.printDistanceTable();
         try {
-            initial.setAsInitialSolution(this.Depot, shops, data);
+            initial.setAsInitialSolution(this.Depot, shops);
         } catch (IncompatibleSolutionException ex) {
             System.out.println("EXCEPTION Could not find an initial solution with" +
                     "the given data (" + ex.getLocalizedMessage() + ")");
@@ -57,6 +59,7 @@ public class TS extends VRPSolver {
         VRPMoveManager mmanager = new VRPMoveManager();
         //Creates the objective function
         VRPObjectiveFunction objFunc = new VRPObjectiveFunction(data);
+       
         //Creates the tabu list
         VRPTabuList tabulist = new VRPTabuList(this.TL_SIZE);
 
@@ -71,7 +74,7 @@ public class TS extends VRPSolver {
         ts.start(); //(VRPSolution)ts.getBestNeighbour(initial);
         //Get the solution
         VRPSolution sol = (VRPSolution) ts.getBestSolution();
-
+        
         System.out.println("Solution: " + sol.toString() + " with cost " + objFunc.evaluate(sol, null));
 
 
