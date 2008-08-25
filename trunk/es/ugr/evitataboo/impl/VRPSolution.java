@@ -5,14 +5,20 @@
 package es.ugr.evitataboo.impl;
 
 import ec.app.itp.ITPdata;
+import ec.app.itp.SimpleCW;
 import ec.app.vrp1.Route;
 import ec.app.vrp1.Shop;
 import es.ugr.evitataboo.IncompatibleSolutionException;
 import es.ugr.evitataboo.Solution;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 
 /**
  *
@@ -22,6 +28,7 @@ public class VRPSolution implements Solution {
 
     ArrayList<Route> routes;
     private int MAX_ITERATIONS = 100000; //To create an initial random solution
+
     private double cost = -1;
     static ITPdata data;
 
@@ -40,32 +47,33 @@ public class VRPSolution implements Solution {
         VRPSolution copy = new VRPSolution();
         copy.setCost(this.getCost());
         //copy.routes = (ArrayList<Route>)this.routes.clone();
-        
-       /* copy.routes = new ArrayList<Route>();
+
+        /* copy.routes = new ArrayList<Route>();
         for (int i = 0; i < this.routes.size(); i++) {
-            Route r = new Route(this.routes.get(i));
-            r.shopsVisited.clear();
-            for (int j = 0; j < this.routes.get(i).shopsVisited.size(); j++) {
-                r.shopsVisited.add(this.routes.get(i).shopsVisited.get(j));
-            }
-            copy.routes.add(r);
+        Route r = new Route(this.routes.get(i));
+        r.shopsVisited.clear();
+        for (int j = 0; j < this.routes.get(i).shopsVisited.size(); j++) {
+        r.shopsVisited.add(this.routes.get(i).shopsVisited.get(j));
+        }
+        copy.routes.add(r);
         }*/
         copy.routes = new ArrayList<Route>();
         for (int i = 0; i < this.routes.size(); i++) {
             Route r = new Route(this.routes.get(i));
             r.shopsVisited.clear();
-            r.shopsVisited = (ArrayList<Shop>)this.routes.get(i).shopsVisited.clone();
+            r.shopsVisited = (ArrayList<Shop>) this.routes.get(i).shopsVisited.clone();
             copy.routes.add(r);
-        }    
+        }
         return copy;
     }   // end clone
+
 
     /**
      * Creates an initial solution 
      * @param data
      */
-    public void setAsInitialSolution(Shop theDepot, List<Shop> theShops) throws IncompatibleSolutionException {
-       // Shop theStore = data.shopList.get(0);
+    public void setAsRandomInitialSolution(Shop theDepot, List<Shop> theShops) throws IncompatibleSolutionException {
+        // Shop theStore = data.shopList.get(0);
         Shop theStore = theDepot;
         boolean solutionInvalid = true;
         for (int i = 1; i < theShops.size(); i++) {
@@ -76,7 +84,7 @@ public class VRPSolution implements Solution {
             r.shopsVisited.add(theStore);
             this.routes.add(r);
         }
-        
+
         /* List<Shop> theShops = new ArrayList<Shop>();
         for (int i = 1; i < data.shopList.size(); i++) {
         theShops.add(data.shopList.get(i));
@@ -91,7 +99,7 @@ public class VRPSolution implements Solution {
             this.routes.clear();
             newRoutes.clear();
 
-           for (int i = 0; i < theShops.size(); i++) {
+            for (int i = 0; i < theShops.size(); i++) {
                 Route r = new Route();
                 newRoutes.add(r);
             }
@@ -125,25 +133,156 @@ public class VRPSolution implements Solution {
                     this.routes.add(r);
                 }
             }
-            
+
             Route emptyRoute = new Route();
             emptyRoute.shopsVisited.add(theStore);
             emptyRoute.shopsVisited.add(theStore);
             this.routes.add(0, emptyRoute);
 
             //this.routes = newRoutes;
-            
+
             iterations++;
-            
+
             if (iterations > MAX_ITERATIONS) {
                 throw new IncompatibleSolutionException("Could not create an " +
                         "initial solution in " + MAX_ITERATIONS + " iterations");
             }
-            
+
         } while (solutionInvalid);
 
-        //System.out.println("INITIAL: "+this.toString());
+    //System.out.println("INITIAL: "+this.toString());
 
+    }
+
+    ////////////////////////CLARKE WRIGHT///////////////////////
+    
+
+    public void setAsClarkeWrightInitialSolution(List<Shop> theShops){
+        SimpleCW simpleCW = new SimpleCW(theShops, data);
+        simpleCW.findRoutes();
+        this.routes = simpleCW.bestSolution;
+        Route emptyRoute = new Route();
+        emptyRoute.shopsVisited.add(data.shopList.get(0));
+        emptyRoute.shopsVisited.add(data.shopList.get(0));
+        this.routes.add(0, emptyRoute);
+    }
+    /////////////////////////DAISY//////////////////////////////
+    public void setAsDaisyInitialSolution(Shop theDepot, List<Shop> theShops) {
+
+
+        SortedMap<Double, Integer> map;
+        map = new TreeMap();
+        ArrayList<ArrayList<Route>> groupedRoutes = new ArrayList<ArrayList<Route>>();
+        for (Shop s : theShops) {
+
+            double angle = Math.atan2(s.coordY - theDepot.coordY, s.coordX - theDepot.coordX);
+
+            map.put(new Double(angle), Integer.parseInt(s.shopID));
+           // System.out.println("SHOP " + s.shopID + "\tAngle " + angle + "\tMap size " + map.size() + "\n");
+        }
+
+        Double[] orderedAngles = new Double[theShops.size()];
+        Iterator<Double> it = map.keySet().iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            orderedAngles[i] = it.next();
+            i++;
+        }
+
+//        for (i = 0; i < orderedAngles.length; i++) {
+//            System.out.println(i + " " + orderedAngles[i]);
+//        }
+        for (i = 0; i < orderedAngles.length; i++) {
+            ArrayList<Route> partialRoutes = getPetals(orderedAngles, i, map, theShops, theDepot);
+            groupedRoutes.add(partialRoutes);
+        }
+        
+        Double[] reverseOrderedAngles = new Double[theShops.size()];
+        
+        for(int j = orderedAngles.length-1; j>=0;j--)
+            reverseOrderedAngles[j]=orderedAngles[j];
+        for (i = 0; i < orderedAngles.length; i++) {
+            ArrayList<Route> partialRoutes = getPetals(reverseOrderedAngles, i, map, theShops, theDepot);
+            groupedRoutes.add(partialRoutes);
+        }
+        
+        ArrayList<Route> bestRoutes = groupedRoutes.get(0);
+        double bestCost = getCostOfGroupedRoutes(bestRoutes);
+        for(int j=0; j<groupedRoutes.size();j++){
+            ArrayList<Route> actuals = groupedRoutes.get(j);
+            double actualcost = getCostOfGroupedRoutes(actuals);
+            if(actualcost<bestCost)
+                bestRoutes = actuals;
+        }
+            
+        this.routes = bestRoutes;
+
+//        for (Route r : this.routes) {
+//            System.out.println("Ruta:" + r);
+//        }
+
+    }
+
+    private ArrayList<Route> getPetals(Double[] orderedAngles, int initialShop,
+            SortedMap<Double, Integer> map, List<Shop> theShops, Shop theDepot) {
+        ArrayList<Route> finalRoutes = new ArrayList<Route>();
+
+        Route newRoute = new Route();
+        newRoute.shopsVisited.add(theDepot);
+        for (int i = 0; i < orderedAngles.length; i++) {
+
+
+            Double angle = orderedAngles[(i + initialShop) % orderedAngles.length];
+
+            Shop s = getShopById(theShops, map.get(angle));
+            newRoute.shopsVisited.add(s);
+            newRoute.shopsVisited.add(theDepot);
+
+            double distance = newRoute.calculateDistance(data);
+
+            double cost = newRoute.calculateCost(data);
+            double time = newRoute.calculateTime(data);
+
+            if (newRoute.demand > data.vehicleCapacity || time > data.maximumWorkTime) {
+                newRoute.shopsVisited.remove(s);
+                finalRoutes.add(newRoute);
+                newRoute = new Route();
+                newRoute.shopsVisited.add(theDepot);
+                newRoute.shopsVisited.add(s);
+            } else {
+                newRoute.shopsVisited.remove(newRoute.shopsVisited.size() - 1);
+            }
+
+        }
+        newRoute.shopsVisited.add(theDepot);
+        finalRoutes.add(newRoute);
+
+        //Always add the 0-0 route
+        Route emptyRoute = new Route();
+        emptyRoute.shopsVisited.add(theDepot);
+        emptyRoute.shopsVisited.add(theDepot);
+        finalRoutes.add(0, emptyRoute);
+
+        return finalRoutes;
+    }
+
+    private Shop getShopById(List<Shop> theShops, Integer id) {
+        for (Shop s : theShops) {
+            if (Integer.parseInt(s.shopID) == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+    
+    private double getCostOfGroupedRoutes(ArrayList<Route> routes){
+        double cost = 0.0;
+        for(Route r:routes){
+            r.calculateDistance(data);
+            r.calculateCost(data);
+            cost+=r.cost;
+        }
+        return cost;
     }
 
     @Override
@@ -172,17 +311,13 @@ public class VRPSolution implements Solution {
     public void setCost(double cost) {
         this.cost = cost;
     }
-    
-    public static void setITPdata(ITPdata itpdata){
+
+    public static void setITPdata(ITPdata itpdata) {
         data = itpdata;
-    
+
     }
-    
-    public static ITPdata  getITPdata(){
+
+    public static ITPdata getITPdata() {
         return data;
     }
-    
-    
-    
-    
 }

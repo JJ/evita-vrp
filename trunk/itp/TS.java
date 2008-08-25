@@ -26,7 +26,7 @@ public class TS extends VRPSolver {
     private ITPdata data;
     private List<Shop> shops;
     private int thisDay;
-    private int MAX_ITERATIONS = 60;
+    private int MAX_ITERATIONS = 60;//estaba a a 20/12
     private int TL_SIZE = 12;
 
     public TS(EvolutionState state, Parameter base, ITPdata input, ArrayList<Shop> List, int dayOfWeek) {
@@ -45,16 +45,17 @@ public class TS extends VRPSolver {
         VRPSolution initial = new VRPSolution();
          //
         VRPSolution.setITPdata(data);
-        //this.data.printDistanceTable();
-        try {
-            initial.setAsInitialSolution(this.Depot, shops);
-        } catch (IncompatibleSolutionException ex) {
-            System.out.println("EXCEPTION Could not find an initial solution with" +
-                    "the given data (" + ex.getLocalizedMessage() + ")");
-            return;
-        }
 
+//        try {
+            //initial.setAsDaisyInitialSolution(this.Depot, shops);
+            initial.setAsClarkeWrightInitialSolution(shops);
+//        } catch (IncompatibleSolutionException ex) {
+//            System.out.println("EXCEPTION Could not find an initial solution with" +
+//                    "the given data (" + ex.getLocalizedMessage() + ")");
+//            return;
+//        }
 
+//        System.out.println("INITIAL "+initial);
         //Creates the move manager
         VRPMoveManager mmanager = new VRPMoveManager();
         //Creates the objective function

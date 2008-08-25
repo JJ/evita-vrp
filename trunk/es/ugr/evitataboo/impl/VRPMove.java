@@ -80,6 +80,7 @@ public class VRPMove implements Move {
         beforePre = Integer.parseInt(initialRoute.shopsVisited.get(shopPosition - 1).shopID);
         afterPre = Integer.parseInt(initialRoute.shopsVisited.get(shopPosition + 1).shopID);
 
+        
         if (routeId != newRoute) { //The routes are different
 
 
