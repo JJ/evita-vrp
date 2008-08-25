@@ -6,6 +6,8 @@ package es.ugr.evitataboo;
 
 
 
+
+
 /**
  *
  * @author ferguson
@@ -21,7 +23,7 @@ public class TabuSearch {
     
     ObjectiveFunction objFunc;
     TabuList tabuList;
-    
+    private double bestSolutionCost;
     int iterations;
     boolean maximize;
     private int maxIterations;
@@ -46,35 +48,46 @@ public class TabuSearch {
         actualSolution.setCost(objFunc.evaluate(bestSolution, null));
         double actualSolutionCost = Double.MAX_VALUE;
         double bestNeighbourCost = Double.MAX_VALUE;
-        double bestSolutionCost = Double.MAX_VALUE;
+        this.bestSolutionCost = Double.MAX_VALUE;
 
         
         while (hasNotFinished()) {
-            //System.out.println("ITERACION "+iterations);
-            //System.out.println("Actual\t"+actualSolution);
+            //System.out.println("\nITERACION "+iterations);
+            //System.out.println("Actual\t"+actualSolutionCost);
+            //System.out.println("Best  \t"+bestSolutionCost);
             bestNeighbour = getBestNeighbour(actualSolution);
             
             bestNeighbourCost = bestNeighbour.getCost();
             
             
             
-            if(bestNeighbourCost<actualSolutionCost){
-                actualSolution = (Solution)bestNeighbour.clone();
-                actualSolutionCost = bestNeighbourCost;
-            }
+//            if(bestNeighbourCost<actualSolutionCost){
+//                actualSolution = (Solution)bestNeighbour.clone();
+//                actualSolutionCost = bestNeighbourCost;
+//            }
+            actualSolution = (Solution)bestNeighbour.clone();
+            actualSolutionCost = bestNeighbourCost;
             
-            if(actualSolutionCost < bestSolutionCost){
+            if(((int)actualSolutionCost) < ((int)bestSolutionCost)){
                 bestSolution = (Solution) actualSolution.clone();
                 bestSolutionCost =  actualSolutionCost;
+                iterations = 0;
                 //System.out.println("NUEVA MEJOR SOLUCION: "+bestSolutionCost);
             }else{
                 //System.out.println("NO MEJOR SOLUCION");
+                iterations++;
             }
-            iterations++;
+            //iterations++;
             tabuList.updateTenure();
             //System.out.println("LISTA TABU:"+tabuList);
 
         }
+//        try {
+//
+//            System.in.read();
+//        } catch (IOException ex) {
+//            System.out.println("Error");
+//        }
     }
 
     boolean hasNotFinished() {
@@ -82,6 +95,8 @@ public class TabuSearch {
             return true;
         else
             return false;
+
+        
     }
 
 
@@ -91,7 +106,7 @@ public class TabuSearch {
         Move bestNeighbourMove = null;
         Solution theBestNeighbour = (Solution) actual.clone();
         double neighbourCost = Double.MAX_VALUE;
-        double theBestNeighbourCost = objFunc.evaluate(theBestNeighbour, bestNeighbourMove);
+        double theBestNeighbourCost = Double.MAX_VALUE;//objFunc.evaluate(theBestNeighbour, bestNeighbourMove); Esto es lo que he cambiado :/
         boolean moved = false;
         
         Solution neighbour = (Solution) actual.clone();
@@ -115,7 +130,11 @@ public class TabuSearch {
             
             
             //System.out.println(move);
-            if (neighbourCost<theBestNeighbourCost && !this.tabuList.isTabu(move)) {
+            boolean isTabu = this.tabuList.isTabu(move);
+            if ((int)neighbourCost<(int)bestSolutionCost){ //Aspiration criteria
+                isTabu=false;
+            }
+            if (neighbourCost<theBestNeighbourCost && !isTabu) {
                 theBestNeighbour = (Solution)neighbour.clone();
                 
                 //System.out.println("\tMejor vecino: "+neighbourCost+" al mover el "+ move);
